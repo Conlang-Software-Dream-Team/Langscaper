@@ -65,6 +65,8 @@ public readonly record struct Consonant(string Symbol, PlaceOfArticulation Place
 
     public static List<Consonant> AllConsonants =
     [
-        VoicelessBilabialNasalStop
+        VoicelessBilabialNasalStop,
+        VoicedBilabialNasal,
+        VoicelessLabioDentalNasalStop
     ];
 }
