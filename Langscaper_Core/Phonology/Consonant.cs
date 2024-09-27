@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace CSP_Core.Phonology
 {
     public enum PlaceOfArticulation
@@ -29,6 +27,7 @@ namespace CSP_Core.Phonology
         Approximant,
         TapOrFlap,
         Trill,
+        Click,
         LateralAffricate,
         LateralFricative,
         LateralApproximant,
@@ -45,20 +44,21 @@ namespace CSP_Core.Phonology
     public enum Mechanism
     {
         Pulmonic,
+        NonPulmonic,
         Ejective,
-        Click,
-        Implosive,
-        None 
+        Implosive
     }
 
     public enum Sonorance
     {
         Sonorant,
         Obstruent,
+        Liquid,
         Undefined
     }
 
     public readonly record struct Consonant(string Symbol, PlaceOfArticulation PlaceOfArticulation, MannerOfArticulation MannerOfArticulation, Voicing Voicing, Mechanism Mechanism, Sonorance Sonorance)
+
     {
         // Nasals
         public static Consonant VoicelessBilabialNasalStop = new("m̥", PlaceOfArticulation.Bilabial, MannerOfArticulation.Nasal, Voicing.Voiceless, Mechanism.Pulmonic, Sonorance.Obstruent);
@@ -123,7 +123,7 @@ namespace CSP_Core.Phonology
         public static Consonant VoicedGlottalFricative = new("ɦ", PlaceOfArticulation.Glottal, MannerOfArticulation.NonSibilantFricative, Voicing.Voiced, Mechanism.Pulmonic, Sonorance.Obstruent);
 
         // Approximants
-        public static Consonant VoicedBilabialApproximant = new("β̞", PlaceOfArticulation.Bilabial, MannerOfArticulation.Approximant, Voicing.Voiced, Mechanism.Pulmonic, Sonorance.Sonorant);
+        public static Consonant VoicedBilabialApproximant = new("β", PlaceOfArticulation.Bilabial, MannerOfArticulation.Approximant, Voicing.Voiced, Mechanism.Pulmonic, Sonorance.Sonorant);
         public static Consonant VoicedLabioDentalApproximant = new("ʋ", PlaceOfArticulation.LabioDental, MannerOfArticulation.Approximant, Voicing.Voiced, Mechanism.Pulmonic, Sonorance.Sonorant);
         public static Consonant VoicedAlveolarApproximant = new("ɹ", PlaceOfArticulation.Alveolar, MannerOfArticulation.Approximant, Voicing.Voiced, Mechanism.Pulmonic, Sonorance.Sonorant);
         public static Consonant VoicedRetroflexApproximant = new("ɻ", PlaceOfArticulation.Retroflex, MannerOfArticulation.Approximant, Voicing.Voiced, Mechanism.Pulmonic, Sonorance.Sonorant);
@@ -160,9 +160,19 @@ namespace CSP_Core.Phonology
         // Lateral Taps and Flaps
         public static Consonant VoicedAlveolarLateralTap = new("ɺ", PlaceOfArticulation.Alveolar, MannerOfArticulation.LateralTapOrFlap, Voicing.Voiced, Mechanism.Pulmonic, Sonorance.Sonorant);
 
-        // Clicks
-    
-        // don't know
+
+        // Clicks 
+        public static Consonant VoicelessBilabialClick = new("ʘ", PlaceOfArticulation.Bilabial, MannerOfArticulation.Click, Voicing.Voiceless, Mechanism.NonPulmonic, Sonorance.Obstruent);
+        public static Consonant VoicelessDentalClick = new("ǀ", PlaceOfArticulation.Dental, MannerOfArticulation.Click, Voicing.Voiceless, Mechanism.NonPulmonic, Sonorance.Obstruent);
+        public static Consonant VoicelessAlveolarClick = new("ǃ", PlaceOfArticulation.Alveolar, MannerOfArticulation.Click, Voicing.Voiceless, Mechanism.NonPulmonic, Sonorance.Obstruent);
+        public static Consonant VoicelessPostalveolarClick = new("ǂ", PlaceOfArticulation.PostAlveolar, MannerOfArticulation.Click, Voicing.Voiceless, Mechanism.NonPulmonic, Sonorance.Obstruent);
+        public static Consonant VoicelessPalatalClick = new("ǁ", PlaceOfArticulation.Palatal, MannerOfArticulation.Click, Voicing.Voiceless, Mechanism.NonPulmonic, Sonorance.Sonorant);
+
+        public static Consonant VoicedBilabialClick = new("ᶢʘ", PlaceOfArticulation.Bilabial, MannerOfArticulation.Click, Voicing.Voiced, Mechanism.NonPulmonic, Sonorance.Obstruent);
+        public static Consonant VoicedDentalClick = new("ᶢǀ", PlaceOfArticulation.Dental, MannerOfArticulation.Click, Voicing.Voiced, Mechanism.NonPulmonic, Sonorance.Obstruent);
+        public static Consonant VoicedAlveolarClick = new("ᶢǃ", PlaceOfArticulation.Alveolar, MannerOfArticulation.Click, Voicing.Voiced, Mechanism.NonPulmonic, Sonorance.Obstruent);
+        public static Consonant VoicedPostalveolarClick = new("ᶢǂ", PlaceOfArticulation.PostAlveolar, MannerOfArticulation.Click, Voicing.Voiced, Mechanism.NonPulmonic, Sonorance.Obstruent);
+        public static Consonant VoicedPalatalClick = new("ᶢǁ", PlaceOfArticulation.Palatal, MannerOfArticulation.Click, Voicing.Voiced, Mechanism.NonPulmonic, Sonorance.Sonorant);
 
         // Implosives
         public static Consonant VoicedBilabialImplosive = new("ɓ", PlaceOfArticulation.Bilabial, MannerOfArticulation.Plosive, Voicing.Voiced, Mechanism.Implosive, Sonorance.Obstruent);
@@ -280,13 +290,18 @@ namespace CSP_Core.Phonology
             // Lateral Taps and Flaps
             VoicedAlveolarLateralTap,
 
-            // Clicks
+
+            // Clicks 
             VoicelessBilabialClick,
-            VoicelessDentalClick,
+            VoicelessDentalClick ,
             VoicelessAlveolarClick,
             VoicelessPostalveolarClick,
-            VoicelessPalatalClick,
-        
+            VoicelessPalatalClick            ,
+            VoicedDentalClick,
+            VoicedAlveolarClick ,
+            VoicedPostalveolarClick,
+
+
 
             // Implosives
             VoicedBilabialImplosive,
@@ -307,6 +322,6 @@ namespace CSP_Core.Phonology
 
             // Lateral Approximants 
             VoicedPalatalLateralApproximantWithDiacritic
-        };
+    };
     }
 }
