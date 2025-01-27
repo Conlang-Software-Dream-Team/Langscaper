@@ -1,8 +1,18 @@
-﻿namespace CSP.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+
+namespace CSP.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-#pragma warning disable CA1822 // Mark members as static
-    public string Greeting => "Welcome to Langscaper!";
-#pragma warning restore CA1822 // Mark members as static
+    public string ConlangName => "My Conlang Name";
+
+    [ObservableProperty]
+    private bool _isSidePanelOpen = false;
+
+    [RelayCommand]
+    public void ToggleSidePanel() 
+    {
+        IsSidePanelOpen = !IsSidePanelOpen;
+    }
 }
