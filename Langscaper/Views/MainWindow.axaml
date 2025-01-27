@@ -1,0 +1,77 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:CSP.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="CSP.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/Langscaper.png"
+        Title="Langscaper">
+
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
+
+
+    <DockPanel>
+      <Menu Background="AliceBlue" DockPanel.Dock="Top">
+        <MenuItem Header="{Binding ConlangName}" />
+        <MenuItem Header="_File">
+          <MenuItem Header="_Save" InputGesture="ctrl+s"/>
+          <MenuItem Header="_Save as" InputGesture="ctrl+shift+s"/>
+          <Separator/>
+          <MenuItem Header="_New language"/>
+          <Separator/>
+          <MenuItem Header="_Open"/>
+          <MenuItem Header="_Open recent"/>
+          <Separator/>
+          <MenuItem Header="_Exit" InputGesture="ctrl+q"/>
+        </MenuItem>
+        <MenuItem Header="_Edit">
+          <MenuItem Header="Undo" InputGesture="ctrl+z"/>
+          <MenuItem Header="Redo" InputGesture="ctrl+shift+z"/>
+        </MenuItem>
+      </Menu>
+      <TextBlock/>
+
+
+      <SplitView IsPaneOpen="{Binding IsSidePanelOpen}"
+                 OpenPaneLength="180"
+                 CompactPaneLength="32"
+                 PaneBackground="AliceBlue"
+                 PanePlacement="Left"
+                 DisplayMode="CompactInline"
+                      >
+        <SplitView.Pane>
+          <StackPanel>
+            <Button Command="{Binding ToggleSidePanel}" HorizontalAlignment="Right">></Button>
+            <ListBox>
+              <ListBoxItem Background="AliceBlue">Phonemics inventory</ListBoxItem>
+              <ListBoxItem Background="AliceBlue">Phonotactics</ListBoxItem>
+              <ListBoxItem Background="AliceBlue">Syntax</ListBoxItem>
+              <ListBoxItem Background="AliceBlue">Grammar</ListBoxItem>
+              <ListBoxItem Background="AliceBlue">Writing system</ListBoxItem>
+              <ListBoxItem Background="AliceBlue">Documentation</ListBoxItem>
+            </ListBox>
+          </StackPanel>
+        </SplitView.Pane>
+
+        <SplitView.Content>
+          <Border Background="AntiqueWhite"/>
+        </SplitView.Content>
+
+      </SplitView>
+
+
+    </DockPanel>
+
+
+
+
+
+
+
+</Window>
