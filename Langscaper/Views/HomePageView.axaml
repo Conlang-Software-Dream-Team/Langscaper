@@ -1,0 +1,19 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Langscaper.Views.HomePageView">
+
+
+  <StackPanel Margin="20">
+    <TextBlock Margin="0 5" FontSize="18" FontWeight="Bold"> My Conlang Name</TextBlock>
+    <TextBlock Margin="0 5" FontStyle="Italic" xml:space="preserve">This is  a single line.</TextBlock>
+    <TextBlock Margin="0 5" xml:space="preserve">This is a multi-line display
+that has returns in it.
+The text block respects the line breaks
+as set out in XAML.</TextBlock>
+  </StackPanel>
+  
+  
+</UserControl>
