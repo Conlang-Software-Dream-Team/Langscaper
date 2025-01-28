@@ -12,12 +12,14 @@ namespace CSP.ViewModels;
 public partial class MainWindowViewModel : ViewModelBase
 {
     public string ConlangName => "My Conlang Name";
+    public ViewModelBase HomePage = new HomePageViewModel();
 
     [ObservableProperty]
     private bool _isSidePanelOpen = false;
 
     [ObservableProperty]
     private ViewModelBase _currentPage = new HomePageViewModel();
+    
 
     [ObservableProperty]
     private ButtonIconTemplate _selectedSection;
@@ -31,6 +33,9 @@ public partial class MainWindowViewModel : ViewModelBase
         CurrentPage = (ViewModelBase)instance;
 
     }
+
+
+
     public ObservableCollection<ButtonIconTemplate> ButtonIconList { get; } = new()
     {
         new ButtonIconTemplate(typeof(PhonemicInventoryViewModel), "speaker_edit_regular"),
@@ -45,6 +50,12 @@ public partial class MainWindowViewModel : ViewModelBase
     public void ToggleSidePanel()
     {
         IsSidePanelOpen = !IsSidePanelOpen;
+    }
+
+    [RelayCommand]
+    public void GoToHomePage()
+    {
+        CurrentPage = HomePage;
     }
 }
 

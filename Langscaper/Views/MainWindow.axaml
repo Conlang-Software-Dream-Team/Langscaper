@@ -18,8 +18,8 @@
 
   <DockPanel>
     <Menu Background="AliceBlue" DockPanel.Dock="Top">
-      <MenuItem Header="{Binding ConlangName}" />
-      <MenuItem Header="_File">
+      <MenuItem Header="{Binding ConlangName}" Command="{ Binding GoToHomePage}"/>
+        <MenuItem Header="_File">
         <MenuItem Header="_Save" InputGesture="ctrl+s"/>
         <MenuItem Header="_Save as" InputGesture="ctrl+shift+s"/>
         <Separator/>
