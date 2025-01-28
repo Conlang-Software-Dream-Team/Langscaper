@@ -50,49 +50,28 @@
           <Button Command="{Binding ToggleSidePanel}" HorizontalAlignment="Right">
             <PathIcon Data="{StaticResource line_horizontal_3_regular}"/>
           </Button>
-          <ListBox>
-            <ListBoxItem Background="AliceBlue">
-              <StackPanel Orientation="Horizontal">
-                <PathIcon  Margin="-5" Data="{StaticResource speaker_edit_regular}"/>
-                <TextBlock Margin="10,5,5,0">Phonemics inventory</TextBlock>
-              </StackPanel>
-            </ListBoxItem>
-            <ListBoxItem Background="AliceBlue">
-              <StackPanel Orientation="Horizontal">
-                <PathIcon  Margin="-5" Data="{StaticResource speaker_settings_regular}"/>
-                <TextBlock Margin="10,5,5,0">Phonotactics</TextBlock>
-              </StackPanel>
-            </ListBoxItem>
-            <ListBoxItem Background="AliceBlue">
-              <StackPanel Orientation="Horizontal">
-                <PathIcon  Margin="-5" Data="{StaticResource text_change_accept_regular}"/>
-                <TextBlock Margin="10,5,5,0">Syntax</TextBlock>
-              </StackPanel>
-            </ListBoxItem>
-            <ListBoxItem Background="AliceBlue">
-              <StackPanel Orientation="Horizontal">
-                <PathIcon  Margin="-5" Data="{StaticResource text_proofing_tools_regular}"/>
-                <TextBlock Margin="10,5,5,0">Grammar</TextBlock>
-              </StackPanel>
-            </ListBoxItem>
-            <ListBoxItem Background="AliceBlue">
-              <StackPanel Orientation="Horizontal">
-                <PathIcon  Margin="-5" Data="{StaticResource text_edit_style_regular}"/>
-                <TextBlock Margin="10,5,5,0">Writing System</TextBlock>
-              </StackPanel>
-            </ListBoxItem>
-            <ListBoxItem Background="AliceBlue">
-              <StackPanel Orientation="Horizontal">
-                <PathIcon  Margin="-5" Data="{StaticResource document_regular}"/>
-                <TextBlock Margin="10,5,5,0">Documentation</TextBlock>
-              </StackPanel>
-            </ListBoxItem>
+          <ListBox ItemsSource="{Binding ButtonIconList}" SelectedItem="{Binding SelectedSection}">
+
+            <ListBox.ItemTemplate>
+              <DataTemplate DataType="{x:Type vm:ButtonIconTemplate}">
+                <StackPanel Orientation="Horizontal">
+                  <PathIcon Margin="-5" Data="{Binding Icon}"/>
+                  <TextBlock Margin="15,0,0,0" Text="{Binding Label}"></TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+
+
           </ListBox>
         </StackPanel>
       </SplitView.Pane>
 
       <SplitView.Content>
-        <Border Background="AntiqueWhite"/>
+        <Border Background="Beige">
+          <TransitioningContentControl Content="{Binding CurrentPage}">
+
+          </TransitioningContentControl>
+        </Border>
       </SplitView.Content>
 
     </SplitView>
