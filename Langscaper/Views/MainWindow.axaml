@@ -16,57 +16,89 @@
   </Design.DataContext>
 
 
-    <DockPanel>
-      <Menu Background="AliceBlue" DockPanel.Dock="Top">
-        <MenuItem Header="{Binding ConlangName}" />
-        <MenuItem Header="_File">
-          <MenuItem Header="_Save" InputGesture="ctrl+s"/>
-          <MenuItem Header="_Save as" InputGesture="ctrl+shift+s"/>
-          <Separator/>
-          <MenuItem Header="_New language"/>
-          <Separator/>
-          <MenuItem Header="_Open"/>
-          <MenuItem Header="_Open recent"/>
-          <Separator/>
-          <MenuItem Header="_Exit" InputGesture="ctrl+q"/>
-        </MenuItem>
-        <MenuItem Header="_Edit">
-          <MenuItem Header="Undo" InputGesture="ctrl+z"/>
-          <MenuItem Header="Redo" InputGesture="ctrl+shift+z"/>
-        </MenuItem>
-      </Menu>
-      <TextBlock/>
+  <DockPanel>
+    <Menu Background="AliceBlue" DockPanel.Dock="Top">
+      <MenuItem Header="{Binding ConlangName}" />
+      <MenuItem Header="_File">
+        <MenuItem Header="_Save" InputGesture="ctrl+s"/>
+        <MenuItem Header="_Save as" InputGesture="ctrl+shift+s"/>
+        <Separator/>
+        <MenuItem Header="_New language"/>
+        <Separator/>
+        <MenuItem Header="_Open"/>
+        <MenuItem Header="_Open recent"/>
+        <Separator/>
+        <MenuItem Header="_Exit" InputGesture="ctrl+q"/>
+      </MenuItem>
+      <MenuItem Header="_Edit">
+        <MenuItem Header="Undo" InputGesture="ctrl+z"/>
+        <MenuItem Header="Redo" InputGesture="ctrl+shift+z"/>
+      </MenuItem>
+    </Menu>
+    <TextBlock/>
 
 
-      <SplitView IsPaneOpen="{Binding IsSidePanelOpen}"
-                 OpenPaneLength="180"
-                 CompactPaneLength="32"
-                 PaneBackground="AliceBlue"
-                 PanePlacement="Left"
-                 DisplayMode="CompactInline"
+    <SplitView IsPaneOpen="{Binding IsSidePanelOpen}"
+               OpenPaneLength="180"
+               CompactPaneLength="32"
+               PaneBackground="AliceBlue"
+               PanePlacement="Left"
+               DisplayMode="CompactInline"
                       >
-        <SplitView.Pane>
-          <StackPanel>
-            <Button Command="{Binding ToggleSidePanel}" HorizontalAlignment="Right">></Button>
-            <ListBox>
-              <ListBoxItem Background="AliceBlue">Phonemics inventory</ListBoxItem>
-              <ListBoxItem Background="AliceBlue">Phonotactics</ListBoxItem>
-              <ListBoxItem Background="AliceBlue">Syntax</ListBoxItem>
-              <ListBoxItem Background="AliceBlue">Grammar</ListBoxItem>
-              <ListBoxItem Background="AliceBlue">Writing system</ListBoxItem>
-              <ListBoxItem Background="AliceBlue">Documentation</ListBoxItem>
-            </ListBox>
-          </StackPanel>
-        </SplitView.Pane>
+      <SplitView.Pane>
+        <StackPanel>
+          <Button Command="{Binding ToggleSidePanel}" HorizontalAlignment="Right">
+            <PathIcon Data="{StaticResource line_horizontal_3_regular}"/>
+          </Button>
+          <ListBox>
+            <ListBoxItem Background="AliceBlue">
+              <StackPanel Orientation="Horizontal">
+                <PathIcon  Margin="-5" Data="{StaticResource speaker_edit_regular}"/>
+                <TextBlock Margin="10,5,5,0">Phonemics inventory</TextBlock>
+              </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem Background="AliceBlue">
+              <StackPanel Orientation="Horizontal">
+                <PathIcon  Margin="-5" Data="{StaticResource speaker_settings_regular}"/>
+                <TextBlock Margin="10,5,5,0">Phonotactics</TextBlock>
+              </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem Background="AliceBlue">
+              <StackPanel Orientation="Horizontal">
+                <PathIcon  Margin="-5" Data="{StaticResource text_change_accept_regular}"/>
+                <TextBlock Margin="10,5,5,0">Syntax</TextBlock>
+              </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem Background="AliceBlue">
+              <StackPanel Orientation="Horizontal">
+                <PathIcon  Margin="-5" Data="{StaticResource text_proofing_tools_regular}"/>
+                <TextBlock Margin="10,5,5,0">Grammar</TextBlock>
+              </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem Background="AliceBlue">
+              <StackPanel Orientation="Horizontal">
+                <PathIcon  Margin="-5" Data="{StaticResource text_edit_style_regular}"/>
+                <TextBlock Margin="10,5,5,0">Writing System</TextBlock>
+              </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem Background="AliceBlue">
+              <StackPanel Orientation="Horizontal">
+                <PathIcon  Margin="-5" Data="{StaticResource document_regular}"/>
+                <TextBlock Margin="10,5,5,0">Documentation</TextBlock>
+              </StackPanel>
+            </ListBoxItem>
+          </ListBox>
+        </StackPanel>
+      </SplitView.Pane>
 
-        <SplitView.Content>
-          <Border Background="AntiqueWhite"/>
-        </SplitView.Content>
+      <SplitView.Content>
+        <Border Background="AntiqueWhite"/>
+      </SplitView.Content>
 
-      </SplitView>
+    </SplitView>
 
 
-    </DockPanel>
+  </DockPanel>
 
 
 
