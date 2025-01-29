@@ -57,7 +57,8 @@ namespace CSP_Core.Phonology
         Undefined
     }
 
-    public readonly record struct Consonant(string Symbol, PlaceOfArticulation PlaceOfArticulation, MannerOfArticulation MannerOfArticulation, Voicing Voicing, Mechanism Mechanism, Sonorance Sonorance)
+
+    public readonly record struct Consonant(string Symbol, PlaceOfArticulation PlaceOfArticulation, MannerOfArticulation MannerOfArticulation, Voicing Voicing, Mechanism Mechanism, Sonorance Sonorance) : Phonem
 
     {
         // Nasals
