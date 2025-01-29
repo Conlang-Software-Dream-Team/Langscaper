@@ -4,5 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Langscaper.Views.PhonemicInventoryView">
-  Phonemic inventory content
+
+
+  <DockPanel>
+    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Background="AntiqueWhite">
+      <ListBoxItem>See all</ListBoxItem>
+      <ListBoxItem>Rarity</ListBoxItem>
+      <ListBoxItem>Sonorant</ListBoxItem>
+      <ListBoxItem>Phonation</ListBoxItem>
+      <ListBoxItem>Possibility</ListBoxItem>
+      <ListBoxItem>Custom filter</ListBoxItem>
+    </StackPanel>
+
+    <StackPanel DockPanel.Dock="Right" Background="Beige">
+      <TextBlock>dfsfs</TextBlock>
+    </StackPanel>
+  </DockPanel>
+
 </UserControl>

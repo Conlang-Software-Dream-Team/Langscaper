@@ -2,7 +2,7 @@
 
 namespace Langscaper.ViewModels
 {
-    public class PhonemicInventoryViewModel : ViewModelBase
+    public partial class PhonemicInventoryViewModel : ViewModelBase
     {
 
     }
