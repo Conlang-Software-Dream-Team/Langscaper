@@ -1,5 +1,4 @@
-﻿using CSP_Core.Phonology;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 
 namespace Phonology
 {
@@ -83,7 +82,7 @@ namespace Phonology
             OpenBackRounded
         ];
 
-        // Height
+        // Height (rows)
         public static ImmutableList<Phonem> close =
          [
             CloseFrontUnrounded,
@@ -91,30 +90,23 @@ namespace Phonology
             CloseCentralUnrounded,
             CloseCentralRounded,
             CloseBackUnrounded,
-
+            CloseBackRounded,
+         ];
+        public static ImmutableList<Phonem> nearClose =
+        [
+            NearCloseFrontUnrounded,
+            NearCloseFrontRounded,
+            NearCloseBackRounded,
+        ];
+        public static ImmutableList<Phonem> closeMid =
+        [
             CloseMidFrontUnrounded,
             CloseMidFrontRounded,
             CloseMidCentralUnrounded,
             CloseMidCentralRounded,
             CloseMidBackUnrounded,
-            CloseMidBackRounded,
-            CloseBackRounded,
-         ];
-        public static ImmutableList<Phonem> nearClose =
-[
-    NearCloseFrontUnrounded,
-            NearCloseFrontRounded,
-            NearCloseBackRounded,
-        ];
-        public static ImmutableList<Phonem> closeMid =
- [
-    CloseMidFrontUnrounded,
-            CloseMidFrontRounded,
-            CloseMidCentralUnrounded,
-            CloseMidCentralRounded,
-            CloseMidBackUnrounded,
             CloseMidBackRounded
- ];
+         ];
         public static ImmutableList<Phonem> mid = [MidCentral];
         public static ImmutableList<Phonem> OpenMid =
         [
@@ -126,19 +118,19 @@ namespace Phonology
             OpenMidBackRounded
         ];
         public static ImmutableList<Phonem> nearOpen =
-[
-      NearOpenFrontUnrounded,
-              NearOpenCentral,
+        [
+             NearOpenFrontUnrounded,
+             NearOpenCentral,
         ];
         public static ImmutableList<Phonem> Open =
-[
-    OpenFrontUnrounded,
+        [
+            OpenFrontUnrounded,
             OpenFrontRounded,
             OpenBackUnrounded,
             OpenBackRounded
-];
+        ];
 
-        //Backness
+        //Backness (columns)
         public static ImmutableList<Phonem> front =
         [
             CloseFrontUnrounded,
@@ -197,18 +189,18 @@ namespace Phonology
             CloseFrontRounded,
             CloseCentralRounded,
             CloseBackRounded,
-            
+
             NearCloseFrontRounded,
-            
+
             CloseMidFrontRounded,
             CloseMidCentralRounded,
             CloseMidBackRounded,
-            
+
             OpenMidFrontRounded,
             OpenMidCentralRounded,
 
             OpenMidBackRounded,
-            
+
             NearOpenFrontUnrounded,
 
             OpenFrontRounded,
@@ -222,17 +214,17 @@ namespace Phonology
             CloseBackUnrounded,
 
             NearCloseFrontUnrounded,
-            
+
             CloseMidFrontUnrounded,
             CloseMidCentralUnrounded,
             CloseMidBackUnrounded,
-            
+
             OpenMidFrontUnrounded,
             OpenMidCentralUnrounded,
             OpenMidBackUnrounded,
-            
+
             NearOpenFrontUnrounded,
-            
+
             OpenFrontUnrounded,
             OpenBackUnrounded
         ];
