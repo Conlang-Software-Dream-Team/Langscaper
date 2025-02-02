@@ -18,12 +18,15 @@
       <ListBoxItem>Custom filter</ListBoxItem>
     </StackPanel>
 
+  <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
 
-    <StackPanel DockPanel.Dock="Left" Background="Beige">
-      <Grid Name="VowelGrid" Margin="5" Background="BurlyWood" MaxWidth="300"/>
-    </StackPanel>
-
-
+        <Grid x:Name="PulmonicConsonantGrid" Grid.Column="0" Margin="10" Background="BlanchedAlmond"/>
+        <Grid x:Name="VowelGrid" Grid.Column="1" Margin="10" Background="BurlyWood"/>
+    </Grid>
 
   </DockPanel>
 
