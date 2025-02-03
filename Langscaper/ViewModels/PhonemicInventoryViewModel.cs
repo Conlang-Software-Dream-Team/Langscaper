@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using Phonology;
 using System.Linq;
-using System;
+
 namespace Langscaper.ViewModels
 {
 
@@ -18,28 +18,35 @@ namespace Langscaper.ViewModels
             );
 
             PulmonicConsonants = new ObservableCollection<PulmonicConsonantTemplate>(
-                Phonem.PulmonicConsonants.Select(p => new PulmonicConsonantTemplate(p))
+                Phonem.Pulmonics.Select(p => new PulmonicConsonantTemplate(p))
 
             );
 
         }
     }
 
-
-    public class VowelsTemplate
+    public abstract class PhonemTemplate
     {
         public string Ipa { get; }
         public int Row { get; }
         public int Column { get; }
 
-        public VowelsTemplate(Phonem p)
+        public PhonemTemplate(Phonem p)
         {
             Ipa = p.ipa;
             Row = GetRow(p);
             Column = GetColumn(p);
         }
 
-        private int GetRow(Phonem phonem)
+        protected abstract int GetColumn(Phonem p);
+        protected abstract int GetRow(Phonem p);
+    }
+
+    public class VowelsTemplate : PhonemTemplate
+    {
+        public VowelsTemplate(Phonem p) : base(p) { }
+
+        protected override int GetRow(Phonem phonem)
         {
             return phonem switch
             {
@@ -53,7 +60,7 @@ namespace Langscaper.ViewModels
                 _ => 0
             };
         }
-        private int GetColumn(Phonem phonem)
+        protected override int GetColumn(Phonem phonem)
         {
             return phonem switch
             {
@@ -65,20 +72,12 @@ namespace Langscaper.ViewModels
         }
     }
 
-    public class PulmonicConsonantTemplate 
+    public class PulmonicConsonantTemplate : PhonemTemplate
     {
-        public string Ipa { get; }
-        public int Row { get; }
-        public int Column { get; }
 
-        public PulmonicConsonantTemplate(Phonem p)
-        {
-            Ipa = p.ipa;
-            Row = GetRow(p);
-            Column = GetColumn(p);
-        }
+        public PulmonicConsonantTemplate(Phonem p) : base(p) { }
 
-        private int GetRow(Phonem phonem)
+        protected override int GetRow(Phonem phonem)
         {
             return phonem switch
             {
@@ -93,7 +92,8 @@ namespace Langscaper.ViewModels
                 _ => 0
             };
         }
-        private int GetColumn(Phonem phonem)
+       
+        protected override int GetColumn(Phonem phonem)
         {
             return phonem switch
             {
@@ -112,4 +112,5 @@ namespace Langscaper.ViewModels
             };
         }
     }
+
 }

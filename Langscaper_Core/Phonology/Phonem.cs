@@ -42,46 +42,7 @@ namespace Phonology
         public static Phonem OpenFrontUnrounded = new("a", "OpenFrontUnrounded", 86);
         public static Phonem OpenFrontRounded = new("ɶ", "OpenFrontRounded", 0);
         public static Phonem OpenBackUnrounded = new("ɑ", "OpenBackUnrounded", 7);
-        public static Phonem OpenBackRounded = new("ɒ", "OpenBackRounded", 2);
-
-
-        public static ImmutableList<Phonem> vowels =
-        [
-            CloseFrontUnrounded,
-            CloseFrontRounded,
-            CloseCentralUnrounded,
-            CloseCentralRounded,
-            CloseBackUnrounded,
-            CloseBackRounded,
-
-            NearCloseFrontUnrounded,
-            NearCloseFrontRounded,
-            NearCloseBackRounded,
-
-            CloseMidFrontUnrounded,
-            CloseMidFrontRounded,
-            CloseMidCentralUnrounded,
-            CloseMidCentralRounded,
-            CloseMidBackUnrounded,
-            CloseMidBackRounded,
-
-            MidCentral,
-
-            OpenMidFrontUnrounded,
-            OpenMidFrontRounded,
-            OpenMidCentralUnrounded,
-            OpenMidCentralRounded,
-            OpenMidBackUnrounded,
-            OpenMidBackRounded,
-
-            NearOpenFrontUnrounded,
-            NearOpenCentral,
-
-            OpenFrontUnrounded,
-            OpenFrontRounded,
-            OpenBackUnrounded,
-            OpenBackRounded
-        ];
+        public static Phonem OpenBackRounded = new("ɒ", "OpenBackRounded", 2);    
 
         // Height (rows)
         public static ImmutableList<Phonem> close =
@@ -130,6 +91,15 @@ namespace Phonology
             OpenBackUnrounded,
             OpenBackRounded
         ];
+
+        public static ImmutableList<Phonem> vowels =
+            close.Concat(nearClose)
+                 .Concat(closeMid)
+                 .Concat(mid)
+                 .Concat(OpenMid)
+                 .Concat(nearOpen)
+                 .Concat(Open)
+                 .ToImmutableList();
 
         //Backness (columns)
         public static ImmutableList<Phonem> front =
@@ -366,196 +336,7 @@ namespace Phonology
         #endregion
 
         // Pulmonic Consonants
-        public static ImmutableList<Phonem> PulmonicConsonants =
-        [
-            // Nasals
-            VoicelessBilabialNasalStop,
-            VoicedBilabialNasal,
 
-            VoicelessLabioDentalNasalStop,
-            VoicedLabioDentalNasal,
-
-            VoicelessAlveolarNasalStop,
-            VoicedAlveolarNasal,
-            VoicedRetroflexNasal,
-
-            VoicelessRetroflexNasalStop,
-
-            VoicedVelarNasal,
-            VoicelessVelarNasalStop,
-            VoicedPalatalNasal,
-            VoicedUvularNasal,
-
-            // Plosives
-            VoicelessBilabialPlosive,
-            VoicedBilabialPlosive,
-
-            VoicelessLabioDentalPlosive,
-            VoicedLabioDentalPlosive,
-
-            VoicelessAlveolarPlosive,
-            VoicedAlveolarPlosive,
-
-            VoicelessRetroflexPlosive,
-            VoicedRetroflexPlosive,
-
-            VoicelessPalatalPlosive,
-            VoicedPalatalPlosive,
-
-            VoicelessVelarPlosive,
-            VoicedVelarPlosive,
-
-            VoicelessUvularPlosive,
-            VoicedUvularPlosive,
-
-            VoicelessGlottalPlosive,
-
-            // Affricates
-            VoicelessAlveolarSibilantAffricate,
-            VoicedAlveolarSibilantAffricate,
-
-            VoicelessPostalveolarSibilantAffricate,
-            VoicedPostalveolarSibilantAffricate,
-
-            VoicelessPalatalSibilantAffricate,
-            VoicedPalatalSibilantAffricate,
-
-            // Fricatives
-            VoicelessBilabialFricative,
-            VoicedBilabialFricative,
-
-            VoicelessLabioDentalFricative,
-            VoicedLabioDentalFricative,
-
-            VoicelessDentalFricative,
-            VoicedDentalFricative,
-
-            VoicelessAlveolarFricative,
-            VoicedAlveolarFricative,
-
-            VoicelessPostAlveolarSibilantFricative,
-            VoicedPostAlveolarSibilantFricative,
-
-            VoicelessRetroflexFricative,
-            VoicedRetroflexFricative,
-
-            VoicelessPalatalFricative,
-            VoicedPalatalFricative,
-
-            VoicelessVelarFricative,
-            VoicedVelarFricative,
-
-            VoicelessUvularFricative,
-            VoicedUvularFricative,
-
-            VoicelessPharyngealFricative,
-            VoicedPharyngealFricative,
-
-            VoicelessGlottalFricative,
-            VoicedGlottalFricative,
-
-            // Approximants
-            VoicedBilabialApproximant,
-
-            VoicedLabioDentalApproximant,
-
-            VoicedAlveolarApproximant,
-
-            VoicedRetroflexApproximant,
-
-            VoicedPalatalApproximant,
-
-            VoicedVelarApproximant,
-
-            VoicedUvularApproximant,
-
-            // Trills
-            VoicedBilabialTrill,
-
-            VoicedAlveolarTrill,
-
-            VoicedRetroflexTrill,
-
-            VoicedUvularTrill,
-
-            // Taps and Flaps
-            Voicedlabiodentalflap,
-
-            VoicedAlveolarTap,
-
-            VoicedRetroflexTap,
-
-            // Lateral Approximants
-            VoicedAlveolarLateralApproximant,
-
-            VoicedRetroflexLateralApproximant,
-
-            VoicedPalatalLateralApproximant,
-
-            VoicedVelarLateralApproximant,
-
-            // Lateral Fricatives
-            VoicelessAlveolarLateralFricative,
-            VoicedAlveolarLateralFricative,
-
-            // Lateral Affricates
-            VoicelessAlveolarLateralAffricate,
-            VoicedAlveolarLateralAffricate,
-
-            // Lateral Taps and Flaps
-            VoicedAlveolarLateralTap,
-
-
-            // Clicks 
-            VoicelessBilabialClick,
-
-            VoicelessDentalClick ,
-
-            VoicelessAlveolarClick,
-
-            VoicelessPostalveolarClick,
-
-            VoicelessPalatalClick            ,
-
-            VoicedDentalClick,
-
-            VoicedAlveolarClick ,
-
-            VoicedPostalveolarClick,
-
-
-
-            // Implosives
-            VoicedBilabialImplosive,
-
-            VoicedAlveolarImplosive,
-
-            VoicedRetroflexImplosive,
-
-            VoicedPalatalImplosive,
-
-            VoicedVelarImplosive,
-
-            VoicedUvularImplosive,
-
-            // Ejectives
-            VoicelessBilabialEjective,
-
-            VoicelessAlveolarEjective,
-
-            VoicelessVelarEjective,
-
-            VoicelessUvularEjective,
-
-            // Approximants 
-            VoicedLabioVelarApproximant,
-
-            // Lateral Approximants 
-            VoicedPalatalLateralApproximantWithDiacritic
-    ];
-
-        // pulmonics
-        // Pulmonic Consonants
         public static ImmutableList<Phonem> Bilabial =
         [
             VoicelessBilabialPlosive,
@@ -696,8 +477,24 @@ namespace Phonology
             VoicedGlottalFricative
         ];
 
+        public static ImmutableList<Phonem> Pulmonics =
+            Bilabial.Concat(Labiodental)
+                    .Concat(Dental)
+                    .Concat(Alveolar)
+                    .Concat(PostAlveolar)
+                    .Concat(Retroflex)
+                    .Concat(Palatal)
+                    .Concat(Velar)
+                    .Concat(Uvular)
+                    .Concat(Pharyngeal)
+                    .Concat(Glottal)
+                    .ToImmutableList();
+
+
+
         // Non-pulmonic Consonants
-        public static ImmutableList<Phonem> PulmonicClicks =
+        // Non-pulmonic
+        public static ImmutableList<Phonem> NonPulmonicClicks =
         [
             VoicelessBilabialClick,
             VoicedBilabialClick,
@@ -710,7 +507,7 @@ namespace Phonology
             VoicelessPalatalClick
         ];
 
-        public static ImmutableList<Phonem> PulmonicVoicedImplosives =
+        public static ImmutableList<Phonem> NonPulmonicVoicedImplosives =
         [
             VoicedBilabialImplosive,
             VoicedAlveolarImplosive,
@@ -720,13 +517,18 @@ namespace Phonology
             VoicedUvularImplosive
         ];
 
-        public static ImmutableList<Phonem> PulmonicEjectives =
+        public static ImmutableList<Phonem> NonPulmonicEjectives =
         [
             VoicelessBilabialEjective,
             VoicelessAlveolarEjective,
             VoicelessVelarEjective,
             VoicelessUvularEjective
         ];
+
+        public static ImmutableList<Phonem> NonPulmonics =
+            NonPulmonicClicks.Concat(NonPulmonicVoicedImplosives)
+            .Concat(NonPulmonicEjectives)
+            .ToImmutableList();
 
         // Manners
         public static ImmutableList<Phonem> Plosive = [  VoicelessBilabialPlosive,
@@ -832,38 +634,8 @@ namespace Phonology
             VoicedVelarLateralApproximant
         ];
 
+        public static ImmutableList<Phonem> Consonants = Pulmonics.Concat(NonPulmonics).ToImmutableList();
 
-        // Non-pulmonic
-        public static ImmutableList<Phonem> NonPulmonicClicks =
-        [
-            VoicelessBilabialClick,
-            VoicedBilabialClick,
-            VoicelessDentalClick,
-            VoicedDentalClick,
-            VoicelessAlveolarClick,
-            VoicedAlveolarClick,
-            VoicelessPostalveolarClick,
-            VoicedPostalveolarClick,
-            VoicelessPalatalClick
-        ];
-
-        public static ImmutableList<Phonem> NonPulmonicVoicedImplosives =
-        [
-            VoicedBilabialImplosive,
-            VoicedAlveolarImplosive,
-            VoicedRetroflexImplosive,
-            VoicedPalatalImplosive,
-            VoicedVelarImplosive,
-            VoicedUvularImplosive
-        ];
-
-        public static ImmutableList<Phonem> NonPulmonicEjectives =
-        [
-            VoicelessBilabialEjective,
-            VoicelessAlveolarEjective,
-            VoicelessVelarEjective,
-            VoicelessUvularEjective
-        ];
         #endregion
     }
 
