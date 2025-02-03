@@ -353,6 +353,8 @@ namespace Phonology
             VoicelessBilabialClick,
             VoicedBilabialClick,
 
+
+
             VoicelessBilabialEjective
         ];
 
@@ -507,7 +509,7 @@ namespace Phonology
             VoicelessPalatalClick
         ];
 
-        public static ImmutableList<Phonem> NonPulmonicVoicedImplosives =
+        public static ImmutableList<Phonem> NonPulmonicImplosives =
         [
             VoicedBilabialImplosive,
             VoicedAlveolarImplosive,
@@ -526,9 +528,9 @@ namespace Phonology
         ];
 
         public static ImmutableList<Phonem> NonPulmonics =
-            NonPulmonicClicks.Concat(NonPulmonicVoicedImplosives)
-            .Concat(NonPulmonicEjectives)
-            .ToImmutableList();
+            NonPulmonicClicks.Concat(NonPulmonicImplosives)
+                             .Concat(NonPulmonicEjectives)
+                             .ToImmutableList();
 
         // Manners
         public static ImmutableList<Phonem> Plosive = [  VoicelessBilabialPlosive,

@@ -7,8 +7,8 @@
              x:Class="Langscaper.Views.PhonemicInventoryView"
              x:DataType="vm:PhonemicInventoryViewModel">
 
-
   <DockPanel>
+
     <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Background="AntiqueWhite">
       <ListBoxItem>See all</ListBoxItem>
       <ListBoxItem>Rarity</ListBoxItem>
@@ -18,15 +18,26 @@
       <ListBoxItem>Custom filter</ListBoxItem>
     </StackPanel>
 
-  <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+    <UserControl>
 
-        <Grid x:Name="PulmonicConsonantGrid" Grid.Column="0" Margin="10" Background="BlanchedAlmond"/>
-        <Grid x:Name="VowelGrid" Grid.Column="1" Margin="10" Background="BurlyWood"/>
-    </Grid>
+    </UserControl>
+
+    <StackPanel Orientation="Horizontal">
+      <StackPanel>
+        <TextBlock FontSize="20">Consonants</TextBlock>
+        <Border HorizontalAlignment="Left"  CornerRadius="10" Background="PaleGoldenrod" Margin="5" MaxHeight="400">
+          <Grid x:Name="ConsonantGrid"/>
+        </Border>
+      </StackPanel>
+
+      <StackPanel>
+        <TextBlock FontSize="20">Vowels</TextBlock>
+        <Border HorizontalAlignment="Left"  CornerRadius="10" Background="BurlyWood" Margin="5" MaxHeight="300">
+          <Grid x:Name="VowelGrid"/>
+        </Border>
+      </StackPanel>
+    </StackPanel>
+
 
   </DockPanel>
 

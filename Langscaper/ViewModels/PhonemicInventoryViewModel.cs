@@ -9,7 +9,7 @@ namespace Langscaper.ViewModels
     public partial class PhonemicInventoryViewModel : ViewModelBase
     {
         public ObservableCollection<VowelsTemplate> Vowels { get; }
-        public ObservableCollection<PulmonicConsonantTemplate> PulmonicConsonants { get; }
+        public ObservableCollection<ConsonantTemplate> Consonants { get; }
 
         public PhonemicInventoryViewModel()
         {
@@ -17,10 +17,12 @@ namespace Langscaper.ViewModels
                 Phonem.vowels.Select(p => new VowelsTemplate(p))
             );
 
-            PulmonicConsonants = new ObservableCollection<PulmonicConsonantTemplate>(
-                Phonem.Pulmonics.Select(p => new PulmonicConsonantTemplate(p))
+            Consonants = new ObservableCollection<ConsonantTemplate>(
+                Phonem.Consonants.Select(p => new ConsonantTemplate(p))
 
             );
+
+       
 
         }
     }
@@ -72,10 +74,10 @@ namespace Langscaper.ViewModels
         }
     }
 
-    public class PulmonicConsonantTemplate : PhonemTemplate
+    public class ConsonantTemplate : PhonemTemplate
     {
 
-        public PulmonicConsonantTemplate(Phonem p) : base(p) { }
+        public ConsonantTemplate(Phonem p) : base(p) { }
 
         protected override int GetRow(Phonem phonem)
         {
@@ -89,6 +91,9 @@ namespace Langscaper.ViewModels
                 _ when Phonem.LateralFricative.Contains(phonem) => 6,
                 _ when Phonem.Approximant.Contains(phonem) => 7,
                 _ when Phonem.LateralApproximant.Contains(phonem) => 8,
+                _ when Phonem.NonPulmonicClicks.Contains(phonem) => 9,
+                _ when Phonem.NonPulmonicEjectives.Contains(phonem) => 10,
+                _ when Phonem.NonPulmonicImplosives.Contains(phonem) => 11,
                 _ => 0
             };
         }

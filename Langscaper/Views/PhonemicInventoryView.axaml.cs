@@ -13,7 +13,7 @@ public partial class PhonemicInventoryView : UserControl
     {
         InitializeComponent();
         DataContextChanged += (s, e) => SetupVowelGrid();
-        DataContextChanged += (s, e) => SetupPulmonicConsonantGrid();
+        DataContextChanged += (s, e) => SetupConsonantGrid();
     }
 
     private void SetupVowelGrid()
@@ -103,26 +103,26 @@ public partial class PhonemicInventoryView : UserControl
         }
     }
 
-    private void SetupPulmonicConsonantGrid()
+    private void SetupConsonantGrid()
     {
         if (DataContext is not PhonemicInventoryViewModel vm) return;
 
-        PulmonicConsonantGrid.Children.Clear();
-        PulmonicConsonantGrid.RowDefinitions.Clear();
-        PulmonicConsonantGrid.ColumnDefinitions.Clear();
+        ConsonantGrid.Children.Clear();
+        ConsonantGrid.RowDefinitions.Clear();
+        ConsonantGrid.ColumnDefinitions.Clear();
 
         string[] columnLabels = { "Bialabial", "Labiodental", "Dental", "Alveolar", "Postalveolar", "Retroflex", "Palatal", "Velar", "Uvular", "Pharyngeal", "Glottal" };
-        string[] rowLabels = { "Plosive", "Nasal", "Trill", "Tap/Flap", "Fricative", "Lateral fricative", "Approximant", "Lateral approximant" };
+        string[] rowLabels = { "Plosive", "Nasal", "Trill", "Tap/Flap", "Fricative", "Lateral fricative", "Approximant", "Lateral approximant", "Click", "Ejective", "Implosive" };
 
         int rowCount = rowLabels.Length;
         int colCount = columnLabels.Length;
 
         for (int i = 0; i <= rowCount; i++)
-            PulmonicConsonantGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            ConsonantGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
 
         for (int j = 0; j <= colCount; j++)
-            PulmonicConsonantGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            ConsonantGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
         for (int j = 0; j < columnLabels.Length; j++)
         {
@@ -138,7 +138,7 @@ public partial class PhonemicInventoryView : UserControl
 
             Grid.SetRow(textBlock, 0);
             Grid.SetColumn(textBlock, j + 1);
-            PulmonicConsonantGrid.Children.Add(textBlock);
+            ConsonantGrid.Children.Add(textBlock);
         }
 
         for (int i = 0; i < rowLabels.Length; i++)
@@ -155,15 +155,16 @@ public partial class PhonemicInventoryView : UserControl
 
             Grid.SetRow(textBlock, i + 1);
             Grid.SetColumn(textBlock, 0);
-            PulmonicConsonantGrid.Children.Add(textBlock);
+            ConsonantGrid.Children.Add(textBlock);
         }
 
         var cellData = new Dictionary<(int, int), List<string>>();
 
-        foreach (var phonem in vm.PulmonicConsonants)
+        foreach (var phonem in vm.Consonants)
         {
             int row = phonem.Row;
             int col = phonem.Column;
+            if (row == 0 || col == 0) continue;
 
 
             if (!cellData.ContainsKey((row, col)))
@@ -176,7 +177,6 @@ public partial class PhonemicInventoryView : UserControl
 
         foreach (var (position, phonemes) in cellData)
         {
-            if (position.Item1 == 0 || position.Item2 == 0) continue;
             var textBlock = new TextBlock
             {
                 Text = string.Join(", ", phonemes),
@@ -188,8 +188,10 @@ public partial class PhonemicInventoryView : UserControl
 
             Grid.SetRow(textBlock, position.Item1);
             Grid.SetColumn(textBlock, position.Item2);
-            PulmonicConsonantGrid.Children.Add(textBlock);
+            ConsonantGrid.Children.Add(textBlock);
 
         }
     }
+
+  
 }
