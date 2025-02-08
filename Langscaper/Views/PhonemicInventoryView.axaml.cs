@@ -189,7 +189,6 @@ public partial class PhonemicInventoryView : UserControl
             Grid.SetRow(textBlock, position.Item1);
             Grid.SetColumn(textBlock, position.Item2);
             ConsonantGrid.Children.Add(textBlock);
-
         }
     }
 
