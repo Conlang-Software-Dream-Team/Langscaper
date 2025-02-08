@@ -12,29 +12,25 @@ public partial class PhonemicInventoryView : UserControl
     public PhonemicInventoryView()
     {
         InitializeComponent();
-        DataContextChanged += (s, e) => SetupVowelGrid();
-        DataContextChanged += (s, e) => SetupConsonantGrid();
+        DataContextChanged += (s, e) => SetupGrids();
     }
 
-    private void SetupVowelGrid()
+    private void ClearGrid(Grid grid)
     {
-        if (DataContext is not PhonemicInventoryViewModel vm) return;
-
-        VowelGrid.Children.Clear();
-        VowelGrid.RowDefinitions.Clear();
-        VowelGrid.ColumnDefinitions.Clear();
-
-        string[] columnLabels = { "Front", "Central", "Back" };
-        string[] rowLabels = { "Close","Near-close", "Close-mid", "Mid", "Open-mid", "Near-open","Open" };
-
+        grid.Children.Clear();
+        grid.RowDefinitions.Clear();
+        grid.ColumnDefinitions.Clear();
+    }
+    private void GenerateGridLabels(Grid grid, string[] rowLabels, string[] columnLabels)
+    {
         int rowCount = rowLabels.Length;
         int colCount = columnLabels.Length;
 
         for (int i = 0; i <= rowCount; i++)
-            VowelGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
         for (int j = 0; j <= columnLabels.Length; j++)
-            VowelGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
 
         for (int j = 0; j < columnLabels.Length; j++)
@@ -51,7 +47,7 @@ public partial class PhonemicInventoryView : UserControl
 
             Grid.SetRow(textBlock, 0);
             Grid.SetColumn(textBlock, j + 1);
-            VowelGrid.Children.Add(textBlock);
+            grid.Children.Add(textBlock);
         }
 
         for (int i = 0; i < rowLabels.Length; i++)
@@ -68,29 +64,30 @@ public partial class PhonemicInventoryView : UserControl
 
             Grid.SetRow(textBlock, i + 1);
             Grid.SetColumn(textBlock, 0);
-            VowelGrid.Children.Add(textBlock);
+            grid.Children.Add(textBlock);
         }
 
+    }
+    private void SetupPhonemeGrid(Grid grid, IEnumerable<PhonemTemplate> phonemViews, bool skipZeroIndexes = false)
+    {
         var cellData = new Dictionary<(int, int), List<string>>();
 
-        foreach (var phonem in vm.Vowels)
+        foreach (var phonem in phonemViews)
         {
-            int row = phonem.Row;
-            int col = phonem.Column;
+            int row = phonem.Row, col = phonem.Column;
+            if (skipZeroIndexes && (row == 0 || col == 0)) continue;
 
             if (!cellData.ContainsKey((row, col)))
-            {
                 cellData[(row, col)] = new List<string>();
-            }
 
             cellData[(row, col)].Add(phonem.Ipa);
         }
 
-        foreach (var (position, phonemes) in cellData)
+        foreach (var (position, phonemeList) in cellData)
         {
             var textBlock = new TextBlock
             {
-                Text = string.Join(", ", phonemes),
+                Text = string.Join(", ", phonemeList),
                 FontSize = 12,
                 Foreground = Brushes.Black,
                 HorizontalAlignment = HorizontalAlignment.Center,
@@ -99,98 +96,26 @@ public partial class PhonemicInventoryView : UserControl
 
             Grid.SetRow(textBlock, position.Item1);
             Grid.SetColumn(textBlock, position.Item2);
-            VowelGrid.Children.Add(textBlock);
+            grid.Children.Add(textBlock);
         }
     }
-
-    private void SetupConsonantGrid()
+    private void SetupGrids()
     {
         if (DataContext is not PhonemicInventoryViewModel vm) return;
 
-        ConsonantGrid.Children.Clear();
-        ConsonantGrid.RowDefinitions.Clear();
-        ConsonantGrid.ColumnDefinitions.Clear();
+        ClearGrid(VowelGrid);
+        ClearGrid(ConsonantGrid);
 
-        string[] columnLabels = { "Bialabial", "Labiodental", "Dental", "Alveolar", "Postalveolar", "Retroflex", "Palatal", "Velar", "Uvular", "Pharyngeal", "Glottal" };
-        string[] rowLabels = { "Plosive", "Nasal", "Trill", "Tap/Flap", "Fricative", "Lateral fricative", "Approximant", "Lateral approximant", "Click", "Ejective", "Implosive" };
+        SetupPhonemeGrid(VowelGrid, vm.Vowels);
+        SetupPhonemeGrid(ConsonantGrid, vm.Consonants, skipZeroIndexes: true);
 
-        int rowCount = rowLabels.Length;
-        int colCount = columnLabels.Length;
+        GenerateGridLabels(VowelGrid,
+                           ["Close", "Near-close", "Close-mid", "Mid", "Open-mid", "Near-open", "Open"],
+                           ["Front", "Central", "Back"]);
+        GenerateGridLabels(ConsonantGrid,
+                           ["Plosive", "Nasal", "Trill", "Tap/Flap", "Fricative", "Lateral fricative", "Approximant", "Lateral approximant", "Click", "Ejective", "Implosive"],
+                           ["Bialabial", "Labiodental", "Dental", "Alveolar", "Postalveolar", "Retroflex", "Palatal", "Velar", "Uvular", "Pharyngeal", "Glottal"]);
+       
 
-        for (int i = 0; i <= rowCount; i++)
-            ConsonantGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-
-
-        for (int j = 0; j <= colCount; j++)
-            ConsonantGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-
-        for (int j = 0; j < columnLabels.Length; j++)
-        {
-            var textBlock = new TextBlock
-            {
-                Text = columnLabels[j],
-                FontSize = 14,
-                FontWeight = FontWeight.Bold,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                Margin = new Thickness(5),
-                MinWidth = 30
-            };
-
-            Grid.SetRow(textBlock, 0);
-            Grid.SetColumn(textBlock, j + 1);
-            ConsonantGrid.Children.Add(textBlock);
-        }
-
-        for (int i = 0; i < rowLabels.Length; i++)
-        {
-            var textBlock = new TextBlock
-            {
-                Text = rowLabels[i],
-                FontSize = 14,
-                FontWeight = FontWeight.Bold,
-                VerticalAlignment = VerticalAlignment.Center,
-                Margin = new Thickness(5),
-                MinWidth = 30
-            };
-
-            Grid.SetRow(textBlock, i + 1);
-            Grid.SetColumn(textBlock, 0);
-            ConsonantGrid.Children.Add(textBlock);
-        }
-
-        var cellData = new Dictionary<(int, int), List<string>>();
-
-        foreach (var phonem in vm.Consonants)
-        {
-            int row = phonem.Row;
-            int col = phonem.Column;
-            if (row == 0 || col == 0) continue;
-
-
-            if (!cellData.ContainsKey((row, col)))
-            {
-                cellData[(row, col)] = new List<string>();
-            }
-
-            cellData[(row, col)].Add(phonem.Ipa);
-        }
-
-        foreach (var (position, phonemes) in cellData)
-        {
-            var textBlock = new TextBlock
-            {
-                Text = string.Join(", ", phonemes),
-                FontSize = 12,
-                Foreground = Brushes.Black,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                Margin = new Thickness(5)
-            };
-
-            Grid.SetRow(textBlock, position.Item1);
-            Grid.SetColumn(textBlock, position.Item2);
-            ConsonantGrid.Children.Add(textBlock);
-        }
     }
-
-  
 }
