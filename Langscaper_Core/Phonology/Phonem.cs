@@ -3,6 +3,10 @@ using System.Reflection.Metadata;
 
 namespace Phonology
 {
+
+
+
+
     public readonly record struct Phonem(string ipa, string name, byte rarity) // rarity in the real world 0 to 125
     {
         // From https://en.wikipedia.org/wiki/Table_of_vowels
@@ -42,7 +46,7 @@ namespace Phonology
         public static Phonem OpenFrontUnrounded = new("a", "OpenFrontUnrounded", 86);
         public static Phonem OpenFrontRounded = new("ɶ", "OpenFrontRounded", 0);
         public static Phonem OpenBackUnrounded = new("ɑ", "OpenBackUnrounded", 7);
-        public static Phonem OpenBackRounded = new("ɒ", "OpenBackRounded", 2);    
+        public static Phonem OpenBackRounded = new("ɒ", "OpenBackRounded", 2);
 
         // Height (rows)
         public static ImmutableList<Phonem> close =
@@ -456,7 +460,7 @@ namespace Phonology
         [
             VoicelessUvularPlosive,
             VoicedUvularPlosive,
-            
+
             VoicedUvularNasal,
 
             VoicelessUvularFricative,
@@ -564,7 +568,7 @@ namespace Phonology
             VoicedVelarNasal,
             VoicedUvularNasal,
             VoicedRetroflexNasal
-         
+
         ];
         public static ImmutableList<Phonem> Trill =
         [
@@ -731,4 +735,6 @@ namespace Phonology
 
 
     #endregion
+
+
 }

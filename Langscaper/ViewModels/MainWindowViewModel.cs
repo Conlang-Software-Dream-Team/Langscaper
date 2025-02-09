@@ -4,6 +4,7 @@ using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Langscaper.ViewModels;
+using Langscaper_Core.Phonology;
 using System;
 using System.Collections.ObjectModel;
 
@@ -31,7 +32,7 @@ public partial class MainWindowViewModel : ViewModelBase
         if (instance is null) return;
 
         CurrentPage = (ViewModelBase)instance;
-
+        PhonemeAudioService.PlayPhoneme("m"); 
     }
 
 
