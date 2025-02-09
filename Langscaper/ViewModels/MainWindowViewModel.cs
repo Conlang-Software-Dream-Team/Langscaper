@@ -32,7 +32,6 @@ public partial class MainWindowViewModel : ViewModelBase
         if (instance is null) return;
 
         CurrentPage = (ViewModelBase)instance;
-        PhonemeAudioService.PlayPhoneme("m"); 
     }
 
 

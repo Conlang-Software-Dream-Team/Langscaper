@@ -1,9 +1,11 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Langscaper.ViewModels;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Langscaper.Views;
 
@@ -85,20 +87,46 @@ public partial class PhonemicInventoryView : UserControl
 
         foreach (var (position, phonemeList) in cellData)
         {
-            var textBlock = new TextBlock
+            var stackPanel = new StackPanel
             {
-                Text = string.Join(", ", phonemeList),
-                FontSize = 12,
-                Foreground = Brushes.Black,
+                Orientation = Orientation.Horizontal,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Margin = new Thickness(5)
             };
 
-            Grid.SetRow(textBlock, position.Item1);
-            Grid.SetColumn(textBlock, position.Item2);
-            grid.Children.Add(textBlock);
+            foreach (var phonemeIpa in phonemeList)
+            {
+                var phoneme = phonemViews.FirstOrDefault(p => p.Ipa == phonemeIpa);
+                if (phoneme == null) continue;
+
+                var textBlock = new TextBlock
+                {
+                    Text = phonemeIpa,
+                    FontSize = 12,
+                    Foreground = Brushes.Black,
+                    Margin = new Thickness(2) // Un peu d'espace entre les phonèmes
+                };
+
+                textBlock.DataContext = phoneme;
+                textBlock.PointerPressed += OnPhonemePointerPressed;
+
+                stackPanel.Children.Add(textBlock);
+            }
+
+            Grid.SetRow(stackPanel, position.Item1);
+            Grid.SetColumn(stackPanel, position.Item2);
+            grid.Children.Add(stackPanel);
         }
     }
+
+    private void OnPhonemePointerPressed(object sender, PointerPressedEventArgs e)
+    {
+        if (!e.GetCurrentPoint(this).Properties.IsRightButtonPressed) return;
+
+        var phoneme = (sender as TextBlock)?.DataContext as PhonemTemplate;
+        phoneme?.PlaySoundCommand.Execute(null);
+    }
+
     private void SetupGrids()
     {
         if (DataContext is not PhonemicInventoryViewModel vm) return;
@@ -115,7 +143,7 @@ public partial class PhonemicInventoryView : UserControl
         GenerateGridLabels(ConsonantGrid,
                            ["Plosive", "Nasal", "Trill", "Tap/Flap", "Fricative", "Lateral fricative", "Approximant", "Lateral approximant", "Click", "Ejective", "Implosive"],
                            ["Bialabial", "Labiodental", "Dental", "Alveolar", "Postalveolar", "Retroflex", "Palatal", "Velar", "Uvular", "Pharyngeal", "Glottal"]);
-       
+
 
     }
 }

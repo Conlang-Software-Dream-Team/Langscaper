@@ -2,9 +2,13 @@
 using System.Collections.ObjectModel;
 using Phonology;
 using System.Linq;
+using System.Windows.Input;
+using Langscaper_Core.Phonology;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Langscaper.ViewModels
 {
+        //PhonemeAudioService.PlayPhoneme("m"); 
 
     public partial class PhonemicInventoryViewModel : ViewModelBase
     {
@@ -33,13 +37,21 @@ namespace Langscaper.ViewModels
         public int Row { get; }
         public int Column { get; }
 
+        public ICommand PlaySoundCommand { get; }
+
+
         public PhonemTemplate(Phonem p)
         {
             Ipa = p.ipa;
             Row = GetRow(p);
             Column = GetColumn(p);
+            PlaySoundCommand = new RelayCommand(PlaySound);
         }
 
+        private void PlaySound()
+        {
+            PhonemeAudioService.PlayPhoneme(Ipa);
+        }
         protected abstract int GetColumn(Phonem p);
         protected abstract int GetRow(Phonem p);
     }
