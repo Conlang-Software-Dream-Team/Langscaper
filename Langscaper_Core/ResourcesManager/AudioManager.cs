@@ -8,6 +8,7 @@ namespace Langscaper_Core.ResourcesManager.Audio
 
         public static void PlayAudio(string filePath)
         {
+            if (filePath == "") return;
             if (!File.Exists(filePath))
                 throw new FileNotFoundException($"Can't play audio, file not found : {filePath}");
 

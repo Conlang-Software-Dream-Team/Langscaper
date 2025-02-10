@@ -37,6 +37,13 @@
     </Menu>
     <TextBlock/>
 
+    
+     <TextBlock DockPanel.Dock="Bottom"
+                Background="BurlyWood"
+                Text="{ Binding LogMessage}"
+                FontSize="14"
+                VerticalAlignment="Center"
+                Padding="5" />
 
     <SplitView IsPaneOpen="{Binding IsSidePanelOpen}"
                OpenPaneLength="180"
@@ -75,6 +82,7 @@
       </SplitView.Content>
 
     </SplitView>
+
 
 
   </DockPanel>

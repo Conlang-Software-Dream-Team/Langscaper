@@ -1,5 +1,5 @@
 ﻿using Langscaper_Core.ResourcesManager.Audio;
-using Langscaper_Core.ResourcesManager;
+using Langscaper_Core.ResourcesManager.FileSystem;
 
 namespace Langscaper_Core.Phonology
 {
@@ -93,18 +93,27 @@ namespace Langscaper_Core.Phonology
             { "a", "IPA\\Open_front_unrounded_vowel.ogg" },
             { "ɶ", "IPA\\Open_front_rounded_vowel.ogg" },
             { "ɑ", "IPA\\Open_back_unrounded_vowel.ogg" },
-    { "ɒ", "IPA\\Open_back_rounded_vowel.ogg" }
+            { "ɒ", "IPA\\Open_back_rounded_vowel.ogg" }
 };
 
+        public static event Action<string>? OnErrorLogged;
 
 
         public static void PlayPhoneme(string phoneme)
         {
-            if (!phonemeToFile.TryGetValue(phoneme, out string? fileName))
-                throw new KeyNotFoundException($"No audio file found for the phonem : {phoneme}");
-
-            string filePath = FileManager.GeAudiotFilePath(fileName);
-            AudioManager.PlayAudio(filePath);
+            try
+            {
+                if (!phonemeToFile.TryGetValue(phoneme, out string? fileName) || fileName is null)
+                {
+                    throw new KeyNotFoundException($"[PhonemAudioService] No audio file found for the phoneme: {phoneme}");
+                }
+                string filePath = FileManager.GeAudiotFilePath(fileName);
+                AudioManager.PlayAudio(filePath);
+            }
+            catch (KeyNotFoundException e)
+            {
+                OnErrorLogged?.Invoke(e.Message);
+            }
         }
     }
 

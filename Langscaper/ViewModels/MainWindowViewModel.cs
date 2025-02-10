@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Langscaper.ViewModels;
 using Langscaper_Core.Phonology;
+using Langscaper_Core.ResourcesManager.FileSystem;
 using System;
 using System.Collections.ObjectModel;
 
@@ -25,6 +26,9 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private ButtonIconTemplate _selectedSection;
 
+    [ObservableProperty]
+    private string _logMessage;
+
     partial void OnSelectedSectionChanged(ButtonIconTemplate value)
     {
         if (value is null) return;
@@ -33,8 +37,6 @@ public partial class MainWindowViewModel : ViewModelBase
 
         CurrentPage = (ViewModelBase)instance;
     }
-
-
 
     public ObservableCollection<ButtonIconTemplate> ButtonIconList { get; } = new()
     {
@@ -45,6 +47,12 @@ public partial class MainWindowViewModel : ViewModelBase
         new ButtonIconTemplate(typeof(WritingSystemViewModel),"text_edit_style_regular"),
         new ButtonIconTemplate(typeof(DocumentationViewModel), "document_regular")
     };
+
+    public MainWindowViewModel()
+    {
+        //FileManager.OnErrorLogged += OnLogWritten;
+        PhonemeAudioService.OnErrorLogged += OnLogWritten;
+    }
 
     [RelayCommand]
     public void ToggleSidePanel()
@@ -57,6 +65,13 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         CurrentPage = HomePage;
     }
+
+    private void OnLogWritten(string log)
+    {
+        LogMessage = log;
+    }
+
+    
 }
 
 public class ButtonIconTemplate
