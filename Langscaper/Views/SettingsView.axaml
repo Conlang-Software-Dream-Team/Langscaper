@@ -1,0 +1,24 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Langscaper.ViewModels"
+        x:Class="CSP.Views.SettingsView"
+        x:DataType="vm:SettingsViewModel"
+        Width="400" Height="225"
+        Title="Settings">
+
+  <Design.DataContext>
+    <vm:SettingsViewModel/>
+  </Design.DataContext>
+
+  <StackPanel Margin="15" Orientation="Vertical">
+    <TextBlock Text="VLC Path:"/>
+    <StackPanel Orientation="Horizontal">
+      <TextBox Text="{Binding VlcPath}" Width="300"/>
+      <Button Content="Browse..." Command="{Binding BrowseForVlcPath}" Margin="5,0,0,0"/>
+    </StackPanel>
+
+
+    <Button Content="Save" Command="{Binding SaveSettingsCommand}" Margin="0,10,0,0"/>
+  </StackPanel>
+
+</Window>

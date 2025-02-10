@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CSP.Views;
 using Langscaper.ViewModels;
 using Langscaper_Core.Phonology;
 using Langscaper_Core.ResourcesManager.FileSystem;
@@ -64,6 +65,13 @@ public partial class MainWindowViewModel : ViewModelBase
     public void GoToHomePage()
     {
         CurrentPage = HomePage;
+    }
+
+    [RelayCommand]
+    public void OpenSettings()
+    {
+        var settingsWindow = new SettingsView();
+        settingsWindow.Show();
     }
 
     private void OnLogWritten(string log)

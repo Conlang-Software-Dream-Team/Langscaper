@@ -19,14 +19,17 @@
   <DockPanel>
     <Menu Background="AliceBlue" DockPanel.Dock="Top">
       <MenuItem Header="{Binding ConlangName}" Command="{ Binding GoToHomePage}"/>
-        <MenuItem Header="_File">
+      <MenuItem Header="_File">
         <MenuItem Header="_Save" InputGesture="ctrl+s"/>
         <MenuItem Header="_Save as" InputGesture="ctrl+shift+s"/>
         <Separator/>
         <MenuItem Header="_New language"/>
         <Separator/>
-        <MenuItem Header="_Open"/>
+        <MenuItem Header="_Open" InputGesture="ctrl+o"/>
         <MenuItem Header="_Open recent"/>
+        <Separator/>
+        <MenuItem Header="_Settings..." Command="{Binding OpenSettings}" InputGesture="ctrl+p"/>
+        <MenuItem Header="_Language settings..." InputGesture="ctrl+p"/>
         <Separator/>
         <MenuItem Header="_Exit" InputGesture="ctrl+q"/>
       </MenuItem>
@@ -37,13 +40,13 @@
     </Menu>
     <TextBlock/>
 
-    
-     <TextBlock DockPanel.Dock="Bottom"
-                Background="BurlyWood"
-                Text="{ Binding LogMessage}"
-                FontSize="14"
-                VerticalAlignment="Center"
-                Padding="5" />
+
+    <TextBlock DockPanel.Dock="Bottom"
+               Background="BurlyWood"
+               Text="{ Binding LogMessage}"
+               FontSize="14"
+               VerticalAlignment="Center"
+               Padding="5" />
 
     <SplitView IsPaneOpen="{Binding IsSidePanelOpen}"
                OpenPaneLength="180"

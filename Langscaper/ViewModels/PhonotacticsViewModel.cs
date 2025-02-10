@@ -1,5 +1,4 @@
-﻿
-using CSP.ViewModels;
+﻿using CSP.ViewModels;
 
 namespace Langscaper.ViewModels
 {
