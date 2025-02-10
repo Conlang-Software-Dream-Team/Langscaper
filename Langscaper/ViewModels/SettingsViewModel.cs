@@ -25,9 +25,9 @@ namespace Langscaper.ViewModels
         }
 
         [RelayCommand]
-        private async void BrowseForVlcPath()
+        public async void BrowseForVlcPath()
         {
-            var topLevel = TopLevel.GetTopLevel((Avalonia.Visual?)(App.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime));
+            var topLevel = GetMainWindow();
             if (topLevel is null) return;
 
             var storageProvider = topLevel.StorageProvider;
@@ -39,6 +39,16 @@ namespace Langscaper.ViewModels
 
             if (files.Count > 0)
                 VlcPath = files[0].Path.LocalPath;
+        }
+
+
+        private static Window? GetMainWindow()
+        {
+            if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
+            {
+                return desktopLifetime.MainWindow;
+            }
+            return null;
         }
 
         [RelayCommand(CanExecute = nameof(CanSave))]
