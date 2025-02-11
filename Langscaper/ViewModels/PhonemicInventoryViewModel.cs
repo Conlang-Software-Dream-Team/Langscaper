@@ -5,13 +5,23 @@ using System.Linq;
 using System.Windows.Input;
 using Langscaper_Core.Phonology;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 
 namespace Langscaper.ViewModels
 {
-        //PhonemeAudioService.PlayPhoneme("m"); 
-
     public partial class PhonemicInventoryViewModel : ViewModelBase
     {
+        public Action RefreshGrids;
+
+        [ObservableProperty]
+        private bool _isRarityEnabled;
+
+        partial void OnIsRarityEnabledChanged(bool value)
+        {
+            RefreshGrids?.Invoke();
+        }
+
         public ObservableCollection<VowelsTemplate> Vowels { get; }
         public ObservableCollection<ConsonantTemplate> Consonants { get; }
 
@@ -26,14 +36,16 @@ namespace Langscaper.ViewModels
 
             );
 
-       
+
 
         }
+
     }
 
     public abstract class PhonemTemplate
     {
         public string Ipa { get; }
+        public byte Rarity { get; }
         public int Row { get; }
         public int Column { get; }
 
@@ -43,6 +55,7 @@ namespace Langscaper.ViewModels
         public PhonemTemplate(Phonem p)
         {
             Ipa = p.ipa;
+            Rarity = p.rarity;
             Row = GetRow(p);
             Column = GetColumn(p);
             PlaySoundCommand = new RelayCommand(PlaySound);
@@ -109,7 +122,7 @@ namespace Langscaper.ViewModels
                 _ => 0
             };
         }
-       
+
         protected override int GetColumn(Phonem phonem)
         {
             return phonem switch

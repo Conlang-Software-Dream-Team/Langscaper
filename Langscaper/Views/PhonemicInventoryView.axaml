@@ -17,12 +17,13 @@
 
     <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Background="AntiqueWhite">
       <ListBoxItem>See all</ListBoxItem>
-      <ListBoxItem>Rarity</ListBoxItem>
-      <ListBoxItem>Sonorant</ListBoxItem>
-      <ListBoxItem>Phonation</ListBoxItem>
-      <ListBoxItem>Possibility</ListBoxItem>
+      <ToggleButton IsChecked="{Binding IsRarityEnabled}">Rarity</ToggleButton>
+      <!--<ToggleButton IsChecked="{Binding IsSonorantEnabled}">Sonorant</ToggleButton>
+      <ToggleButton IsChecked="{Binding IsPhonationEnabled}">Phonation</ToggleButton>
+      <ToggleButton IsChecked="{Binding IsPossibilityEnabled}">Possibility</ToggleButton>-->
       <ListBoxItem>Custom filter</ListBoxItem>
     </StackPanel>
+
 
     <UserControl>
 

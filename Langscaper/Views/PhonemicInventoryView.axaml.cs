@@ -4,6 +4,7 @@ using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Langscaper.ViewModels;
+using Phonology;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,8 +15,16 @@ public partial class PhonemicInventoryView : UserControl
     public PhonemicInventoryView()
     {
         InitializeComponent();
-        DataContextChanged += (s, e) => SetupGrids();
+        DataContextChanged += (s, e) => 
+        {
+            if (DataContext is not PhonemicInventoryViewModel vm) return;
+            vm.RefreshGrids += SetupGrids;
+            SetupGrids();
+        };
+
     }
+
+
 
     private void ClearGrid(Grid grid)
     {
@@ -104,7 +113,9 @@ public partial class PhonemicInventoryView : UserControl
                     Text = phonemeIpa,
                     FontSize = 12,
                     Foreground = Brushes.Black,
-                    Margin = new Thickness(2) // Un peu d'espace entre les phonèmes
+                    Background = GetFilterColor(phoneme),
+                    Margin = new Thickness(1),
+                    Padding = new Thickness(3)
                 };
 
                 textBlock.DataContext = phoneme;
@@ -118,7 +129,6 @@ public partial class PhonemicInventoryView : UserControl
             grid.Children.Add(stackPanel);
         }
     }
-
     private void OnPhonemePointerPressed(object sender, PointerPressedEventArgs e)
     {
         if (!e.GetCurrentPoint(this).Properties.IsRightButtonPressed) return;
@@ -126,10 +136,11 @@ public partial class PhonemicInventoryView : UserControl
         var phoneme = (sender as TextBlock)?.DataContext as PhonemTemplate;
         phoneme?.PlaySoundCommand.Execute(null);
     }
-
     private void SetupGrids()
     {
         if (DataContext is not PhonemicInventoryViewModel vm) return;
+
+        isRarityFilterActive = vm.IsRarityEnabled;
 
         ClearGrid(VowelGrid);
         ClearGrid(ConsonantGrid);
@@ -146,4 +157,52 @@ public partial class PhonemicInventoryView : UserControl
 
 
     }
+
+    #region Filters
+
+     bool isRarityFilterActive;
+    private IBrush GetRarityColor(byte rarity)
+    {
+        Color color;
+
+        if (rarity <= 8)
+        {
+            // 🔴 Rouge vif → Rouge foncé
+            double t = rarity / 8.0;
+            color = Color.FromRgb(255, (byte)(50 + 100 * t), (byte)(50 + 100 * t));
+        }
+        else if (rarity <= 18)
+        {
+            // 🟠 Orange vif → Orange foncé
+            double t = (rarity - 10) / 8.0;
+            color = Color.FromRgb(255, (byte)(150 + 50 * (1 - t)), 0);
+        }
+        else if (rarity <= 45)
+        {
+            // 🟡 Jaune vif → Jaune foncé
+            double t = (rarity - 32) / 13.0;
+            color = Color.FromRgb(255, (byte)(255 - 100 * t), 0);
+        }
+        else
+        {
+            // 🟢 Vert clair → Vert foncé
+            double t = (rarity - 75) / 23.0;
+            color = Color.FromRgb((byte)(50 * (1 - t)), (byte)(200 - 50 * t), 0);
+        }
+
+        return new SolidColorBrush(color);
+    }
+
+
+
+    private IBrush GetFilterColor(PhonemTemplate p)
+    {
+        if(isRarityFilterActive)
+            return GetRarityColor(p.Rarity);
+
+        return Brushes.Transparent; 
+
+    }
+
+    #endregion
 }
