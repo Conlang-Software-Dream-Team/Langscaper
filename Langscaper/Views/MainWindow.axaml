@@ -70,21 +70,22 @@
                 </StackPanel>
               </DataTemplate>
             </ListBox.ItemTemplate>
-
-
           </ListBox>
         </StackPanel>
       </SplitView.Pane>
 
       <SplitView.Content>
-        <Border Background="Beige">
-          <TransitioningContentControl Content="{Binding CurrentPage}">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+          <Border Background="Beige">
+            <TransitioningContentControl Content="{Binding CurrentPage}">
+            </TransitioningContentControl>
+          </Border>
+        </ScrollViewer>
 
-          </TransitioningContentControl>
-        </Border>
       </SplitView.Content>
 
     </SplitView>
+
 
 
 
