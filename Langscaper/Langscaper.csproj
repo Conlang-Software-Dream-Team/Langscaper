@@ -6,6 +6,7 @@
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -34,6 +35,381 @@
     </ItemGroup>
 
     <ItemGroup>
+      <AvaloniaResource Update="Assets\Audio\IPA\Alveolar_approximant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Alveolar_ejective_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Alveolar_ejective_plosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Alveolar_lateral_approximant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Alveolar_lateral_click.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Alveolar_nasal.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Alveolar_tap.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Alveolar_trill.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Bilabial_click.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Bilabial_ejective_plosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Bilabial_nasal.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Bilabial_trill.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Close-mid_back_rounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Close-mid_back_unrounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Close-mid_central_rounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Close-mid_central_unrounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Close-mid_front_rounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Close-mid_front_unrounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Close_back_rounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Close_back_unrounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Close_central_rounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Close_central_unrounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Close_front_rounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Close_front_unrounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Dental_click.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Dental_ejective_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Glottal_stop.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Labiodental_approximant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Labiodental_ejective_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Labiodental_nasal.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\LICENSE.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Mid-central_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Near-close_near-back_rounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Near-close_near-front_rounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Near-close_near-front_unrounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Near-open_central_unrounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Near-open_front_unrounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Open-mid_back_rounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Open-mid_back_unrounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Open-mid_central_rounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Open-mid_central_unrounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Open-mid_front_rounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Open-mid_front_unrounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Open_back_rounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Open_back_unrounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Open_front_rounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Open_front_unrounded_vowel.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Palatal_approximant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Palatal_ejective_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Palatal_lateral_approximant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Palatal_nasal.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Palatoalveolar_click.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Postalveolar_click.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Retroflex_approximant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Retroflex_ejective_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Retroflex_ejective_plosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Retroflex_flap.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Retroflex_lateral_approximant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Retroflex_nasal.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Uvular_ejective_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Uvular_ejective_plosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Uvular_nasal.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Uvular_trill.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Velarized_alveolar_lateral_approximant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Velar_ejective_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Velar_ejective_plosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Velar_lateral_approximant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Velar_nasal.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_alveolar_implosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_alveolar_lateral_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_alveolar_plosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_alveolar_sibilant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_alveolar_sibilant_affricate.oga">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_alveolo-palatal_affricate.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_alveolo-palatal_sibilant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_bilabial_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_bilabial_implosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_bilabial_plosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_dental_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_epiglottal_trill_2.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_glottal_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_labio-velar_approximant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_labiodental_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_palatal_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_palatal_implosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_palatal_plosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_palato-alveolar_affricate.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_palato-alveolar_sibilant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_pharyngeal_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_retroflex_affricate.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_retroflex_stop.oga">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_uvular_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_uvular_implosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_uvular_stop.oga">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_velar_approximant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_velar_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_velar_implosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiced_velar_plosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_alveolar_lateral_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_alveolar_plosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_alveolar_sibilant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_alveolar_sibilant_affricate.oga">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_alveolo-palatal_affricate.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_alveolo-palatal_sibilant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_bilabial_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_bilabial_plosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_dental_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_dorso-palatal_velar_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_epiglottal_trill.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_glottal_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_labio-velar_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_labiodental_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_palatal_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_palatal_implosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_palatal_plosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_palato-alveolar_affricate.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_palato-alveolar_sibilant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_pharyngeal_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_retroflex_affricate.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_retroflex_sibilant.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_retroflex_stop.oga">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_uvular_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_uvular_plosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_velar_fricative.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+      <AvaloniaResource Update="Assets\Audio\IPA\Voiceless_velar_plosive.ogg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
       <AvaloniaResource Update="Assets\StylesIconButton.axaml">
         <SubType>Designer</SubType>
       </AvaloniaResource>

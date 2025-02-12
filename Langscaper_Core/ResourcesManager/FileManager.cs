@@ -2,24 +2,23 @@
 {
     public static class FileManager
     {
-        private static readonly string AudioDirectory = Path.Combine(AppContext.BaseDirectory, "Assets", "Audio");
 
         static FileManager()
         {
-            if (!Directory.Exists(AudioDirectory))
+            if (!Directory.Exists(AppSettings.AudioDirectory))
             {
-                throw new DirectoryNotFoundException($" Folder not founds :  {AudioDirectory}");
+                throw new DirectoryNotFoundException($" Folder not founds :  {AppSettings.AudioDirectory}");
             }
         }
 
         public static event Action<string>? OnErrorLogged;
 
-        public static string GeAudiotFilePath(string fileName)
+        public static string GetAudioFilePath(string fileName)
         {
 
             try
             {
-                string fullPath = Path.Combine(AudioDirectory, fileName);
+                string fullPath = Path.Combine(AppSettings.AudioDirectory, fileName);
                 if (File.Exists(fullPath))
                     return fullPath;
 

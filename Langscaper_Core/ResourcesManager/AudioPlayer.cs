@@ -2,7 +2,7 @@
 
 namespace Langscaper_Core.ResourcesManager.Audio
 {
-    public static class AudioManager
+    public static class AudioPlayer
     {
         public static void PlayAudio(string filePath)
         {

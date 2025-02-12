@@ -7,6 +7,8 @@ namespace Langscaper_Core
         private static readonly string ConfigFilePath = Path.Combine(AppContext.BaseDirectory, "config.json");
 
         public static string VlcPath { get; set; } = Path.Combine(AppContext.BaseDirectory, "Libs", "win64", "VLC", "vlc.exe");
+        public static readonly string AudioDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "Audio");
+
 
         public static void LoadSettings()
         {

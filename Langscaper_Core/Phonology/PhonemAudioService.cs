@@ -107,8 +107,8 @@ namespace Langscaper_Core.Phonology
                 {
                     throw new KeyNotFoundException($"[PhonemAudioService] No audio file found for the phoneme: {phoneme}");
                 }
-                string filePath = FileManager.GeAudiotFilePath(fileName);
-                AudioManager.PlayAudio(filePath);
+                string filePath = FileManager.GetAudioFilePath(fileName);
+                AudioPlayer.PlayAudio(filePath);
             }
             catch (KeyNotFoundException e)
             {
