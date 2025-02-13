@@ -4,7 +4,7 @@ using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Langscaper.ViewModels;
-using Phonology;
+using Langscaper_Core.Phonology;
 using System;
 using System.Collections.Generic;
 using System.Linq;

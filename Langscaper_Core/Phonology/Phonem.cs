@@ -1,12 +1,8 @@
 ﻿using System.Collections.Immutable;
-using System.Reflection.Metadata;
 
-namespace Phonology
+namespace Langscaper_Core.Phonology
+
 {
-
-
-
-
     public readonly record struct Phonem(string ipa, string name, byte rarity) // rarity in the real world 0 to 125
     {
         // From https://en.wikipedia.org/wiki/Table_of_vowels

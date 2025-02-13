@@ -1,6 +1,6 @@
 ﻿using CSP.ViewModels;
 using System.Collections.ObjectModel;
-using Phonology;
+using Langscaper_Core.Phonology;
 using System.Linq;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
