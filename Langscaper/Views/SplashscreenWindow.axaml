@@ -2,9 +2,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:vm="using:Langscaper.ViewModels"
         x:Class="Langscaper.Views.SplashscreenWindow"
-         Width="400" Height="250"
+        x:DataType="vm:SplashscreenWindowViewModel"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width="600" Height="300"
         WindowStartupLocation="CenterScreen"
         CanResize="False"
         ShowInTaskbar="False"
@@ -19,12 +21,13 @@
 
   <Grid>
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+      <TextBlock Foreground="#222" FontSize="60" HorizontalAlignment="Center">Langscaper</TextBlock>
       <TextBlock Text="Loading..." Foreground="#222" FontSize="16"
-                 HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                 HorizontalAlignment="Center" Margin="0,20,0,10"/>
 
       <ProgressBar Width="250" Height="10"
                    Minimum="0" Maximum="100"
-                   Value="50"
+                   Value="{Binding Progress}"
                    IsIndeterminate="True"/>
     </StackPanel>
   </Grid>

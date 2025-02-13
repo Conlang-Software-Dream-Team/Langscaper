@@ -34,7 +34,7 @@ public partial class App : Application
 
             var splashScreen = new SplashscreenWindow
             {
-                DataContext = new SplashScreenWindowViewModel(() => ShowMainWindow(desktop))
+                DataContext = new SplashscreenWindowViewModel(() => ShowMainWindow(desktop))
             };
 
             desktop.MainWindow = splashScreen;

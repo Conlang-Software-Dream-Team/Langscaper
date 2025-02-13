@@ -6,7 +6,7 @@ using Langscaper_Core.Phonology;
 
 namespace Langscaper.ViewModels
 {
-    public class SplashScreenWindowViewModel : ViewModelBase
+    public class SplashscreenWindowViewModel : ViewModelBase
     {
         private readonly Action _onLoadingComplete;
         private double _progress;
@@ -17,7 +17,7 @@ namespace Langscaper.ViewModels
             set => SetProperty(ref _progress, value);
         }
 
-        public SplashScreenWindowViewModel(Action onLoadingComplete)
+        public SplashscreenWindowViewModel(Action onLoadingComplete)
         {
             _onLoadingComplete = onLoadingComplete;
             InitializeAsync();
