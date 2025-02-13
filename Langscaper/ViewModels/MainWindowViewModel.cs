@@ -1,10 +1,13 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media;
+using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CSP.Views;
 using Langscaper.ViewModels;
+using Langscaper.Views;
 using Langscaper_Core.Phonology;
 using Langscaper_Core.ResourcesManager.FileSystem;
 using System;
@@ -22,7 +25,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [ObservableProperty]
     private ViewModelBase _currentPage = new HomePageViewModel();
-    
+
 
     [ObservableProperty]
     private ButtonIconTemplate _selectedSection;
@@ -79,7 +82,26 @@ public partial class MainWindowViewModel : ViewModelBase
         LogMessage = log;
     }
 
-    
+    internal static void NavigateToMainView()
+    {
+        Dispatcher.UIThread.Post(() =>
+        {
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+
+            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                foreach (var window in desktop.Windows)
+                {
+                    if (window is SplashscreenWindow splashScreen)
+                    {
+                        splashScreen.Close();
+                        break;
+                    }
+                }
+            }
+        });
+    }
 }
 
 public class ButtonIconTemplate
@@ -95,7 +117,7 @@ public class ButtonIconTemplate
         _modelType = modeltype;
         _label = _modelType.Name.Replace("ViewModel", "");
         Application.Current.TryFindResource(icon, out var resource);
-         _icon = (StreamGeometry)resource;
+        _icon = (StreamGeometry)resource;
 
     }
 }
