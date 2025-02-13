@@ -156,7 +156,7 @@ public partial class PhonemicInventoryView : UserControl
                            ["Close", "Near-close", "Close-mid", "Mid", "Open-mid", "Near-open", "Open"],
                            ["Front", "Central", "Back"]);
         GenerateGridLabels(ConsonantGrid,
-                           ["Plosive", "Nasals", "Trill", "Tap/Flap", "Fricative", "Lateral fricative", "Approximant", "Lateral approximant", "Click", "Ejective", "Implosive"],
+                           ["Plosive", "Nasals", "Trill", "Tap/Flap", "Fricative", "Lateral fricative", "Approximant", "Lateral approximant"],
                            ["Bialabial", "Labiodental", "Dental", "Alveolar", "Postalveolar", "Retroflex", "Palatal", "Velar", "Uvular", "Pharyngeal", "Glottal"]);
 
 

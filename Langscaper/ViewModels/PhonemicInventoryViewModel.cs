@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using Langscaper_Core.Services;
+using Langscaper_Core.Phonology.Diacritics;
 
 namespace Langscaper.ViewModels
 {
@@ -16,7 +17,7 @@ namespace Langscaper.ViewModels
 
         [ObservableProperty]
         private bool _isRarityEnabled;
-        
+
         [ObservableProperty]
         private bool _isSonorantEnabled;
 
@@ -35,11 +36,11 @@ namespace Langscaper.ViewModels
         public PhonemicInventoryViewModel()
         {
             Vowels = new ObservableCollection<VowelsTemplate>(
-                Phonem.Vowels.Select(p => new VowelsTemplate(p))
+                PhonemeCategories.Vowels.Select(p => new VowelsTemplate(p))
             );
 
             Consonants = new ObservableCollection<ConsonantTemplate>(
-                Phonem.Consonants.Select(p => new ConsonantTemplate(p))
+                PhonemeCategories.Consonants.Select(p => new ConsonantTemplate(p))
 
             );
         }
@@ -51,17 +52,24 @@ namespace Langscaper.ViewModels
         public string Ipa { get; }
         public byte Rarity { get; }
         public bool IsSonorant { get; }
+
+        public ArticulationPlaceModification articulationPlaceModification;
+        public SyllabicRole syllabicRole { get; }
+
+
         public int Row { get; }
         public int Column { get; }
 
         public ICommand PlaySoundCommand { get; }
 
-
-        public PhonemTemplate(Phonem p)
+        public PhonemTemplate(Phoneme p)
         {
-            Ipa = p.ipa;
-            Rarity = p.rarity;
-            IsSonorant = Phonem.Sonorants.Contains(p);
+            PhonemeNotationService.PhonemeToIPA.TryGetValue(p, out var ipa);
+            Ipa = ipa;
+
+            PhonemeRarityService.PhonemeToRarity.TryGetValue(p, out var rarity);
+            Rarity = rarity;
+            IsSonorant = PhonemeCategories.Sonorants.Contains(p);
 
             Row = GetRow(p);
             Column = GetColumn(p);
@@ -72,35 +80,39 @@ namespace Langscaper.ViewModels
         {
             PhonemeAudioService.PlayPhoneme(Ipa);
         }
-        protected abstract int GetColumn(Phonem p);
-        protected abstract int GetRow(Phonem p);
+        protected abstract int GetColumn(Phoneme p);
+        protected abstract int GetRow(Phoneme p);
     }
 
     public class VowelsTemplate : PhonemTemplate
     {
-        public VowelsTemplate(Phonem p) : base(p) { }
+        public RoundnessModification roundnessModification;
+        public TongueRootPosition tongueRootPosition;
+        public TonguePosition tonguePosition; 
 
-        protected override int GetRow(Phonem phonem)
+        public VowelsTemplate(Phoneme p) : base(p) { }
+
+        protected override int GetRow(Phoneme phonem)
         {
             return phonem switch
             {
-                _ when Phonem.close.Contains(phonem) => 1,
-                _ when Phonem.nearClose.Contains(phonem) => 2,
-                _ when Phonem.closeMid.Contains(phonem) => 3,
-                _ when Phonem.mid.Contains(phonem) => 4,
-                _ when Phonem.OpenMid.Contains(phonem) => 5,
-                _ when Phonem.nearOpen.Contains(phonem) => 6,
-                _ when Phonem.Open.Contains(phonem) => 7,
+                _ when PhonemeCategories.close.Contains(phonem) => 1,
+                _ when PhonemeCategories.nearClose.Contains(phonem) => 2,
+                _ when PhonemeCategories.closeMid.Contains(phonem) => 3,
+                _ when PhonemeCategories.mid.Contains(phonem) => 4,
+                _ when PhonemeCategories.OpenMid.Contains(phonem) => 5,
+                _ when PhonemeCategories.nearOpen.Contains(phonem) => 6,
+                _ when PhonemeCategories.Open.Contains(phonem) => 7,
                 _ => 0
             };
         }
-        protected override int GetColumn(Phonem phonem)
+        protected override int GetColumn(Phoneme phonem)
         {
             return phonem switch
             {
-                _ when Phonem.front.Contains(phonem) => 1,
-                _ when Phonem.Central.Contains(phonem) => 2,
-                _ when Phonem.Back.Contains(phonem) => 3,
+                _ when PhonemeCategories.front.Contains(phonem) => 1,
+                _ when PhonemeCategories.Central.Contains(phonem) => 2,
+                _ when PhonemeCategories.Back.Contains(phonem) => 3,
                 _ => 0
             };
         }
@@ -108,43 +120,43 @@ namespace Langscaper.ViewModels
 
     public class ConsonantTemplate : PhonemTemplate
     {
+        public MannerModification mannerModification;
+        public PhonationDiacritic phonationDiacritic; 
+        public ReleaseNasalization releaseNasalization;
 
-        public ConsonantTemplate(Phonem p) : base(p) { }
+        public ConsonantTemplate(Phoneme p) : base(p) { }
 
-        protected override int GetRow(Phonem phonem)
+        protected override int GetRow(Phoneme phonem)
         {
             return phonem switch
             {
-                _ when Phonem.Plosive.Contains(phonem) => 1,
-                _ when Phonem.Nasals.Contains(phonem) => 2,
-                _ when Phonem.Trill.Contains(phonem) => 3,
-                _ when Phonem.TapOrFlap.Contains(phonem) => 4,
-                _ when Phonem.Fricative.Contains(phonem) => 5,
-                _ when Phonem.LateralFricative.Contains(phonem) => 6,
-                _ when Phonem.Approximant.Contains(phonem) => 7,
-                _ when Phonem.LateralApproximant.Contains(phonem) => 8,
-                _ when Phonem.NonPulmonicClicks.Contains(phonem) => 9,
-                _ when Phonem.NonPulmonicEjectives.Contains(phonem) => 10,
-                _ when Phonem.NonPulmonicImplosives.Contains(phonem) => 11,
+                _ when PhonemeCategories.Plosive.Contains(phonem) => 1,
+                _ when PhonemeCategories.Nasals.Contains(phonem) => 2,
+                _ when PhonemeCategories.Trill.Contains(phonem) => 3,
+                _ when PhonemeCategories.TapOrFlap.Contains(phonem) => 4,
+                _ when PhonemeCategories.Fricative.Contains(phonem) => 5,
+                _ when PhonemeCategories.LateralFricative.Contains(phonem) => 6,
+                _ when PhonemeCategories.Approximant.Contains(phonem) => 7,
+                _ when PhonemeCategories.LateralApproximant.Contains(phonem) => 8,
                 _ => 0
             };
         }
 
-        protected override int GetColumn(Phonem phonem)
+        protected override int GetColumn(Phoneme phonem)
         {
             return phonem switch
             {
-                _ when Phonem.Bilabial.Contains(phonem) => 1,
-                _ when Phonem.Labiodental.Contains(phonem) => 2,
-                _ when Phonem.Dental.Contains(phonem) => 3,
-                _ when Phonem.Alveolar.Contains(phonem) => 4,
-                _ when Phonem.PostAlveolar.Contains(phonem) => 5,
-                _ when Phonem.Retroflex.Contains(phonem) => 6,
-                _ when Phonem.Palatal.Contains(phonem) => 7,
-                _ when Phonem.Velar.Contains(phonem) => 8,
-                _ when Phonem.Uvular.Contains(phonem) => 9,
-                _ when Phonem.Pharyngeal.Contains(phonem) => 10,
-                _ when Phonem.Glottal.Contains(phonem) => 11,
+                _ when PhonemeCategories.Bilabial.Contains(phonem) => 1,
+                _ when PhonemeCategories.Labiodental.Contains(phonem) => 2,
+                _ when PhonemeCategories.Dental.Contains(phonem) => 3,
+                _ when PhonemeCategories.Alveolar.Contains(phonem) => 4,
+                _ when PhonemeCategories.PostAlveolar.Contains(phonem) => 5,
+                _ when PhonemeCategories.Retroflex.Contains(phonem) => 6,
+                _ when PhonemeCategories.Palatal.Contains(phonem) => 7,
+                _ when PhonemeCategories.Velar.Contains(phonem) => 8,
+                _ when PhonemeCategories.Uvular.Contains(phonem) => 9,
+                _ when PhonemeCategories.Pharyngeal.Contains(phonem) => 10,
+                _ when PhonemeCategories.Glottal.Contains(phonem) => 11,
                 _ => 0
             };
         }
