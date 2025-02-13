@@ -5,6 +5,7 @@ using Avalonia.Layout;
 using Avalonia.Media;
 using Langscaper.ViewModels;
 using Phonology;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -112,7 +113,7 @@ public partial class PhonemicInventoryView : UserControl
                 {
                     Text = phonemeIpa,
                     FontSize = 12,
-                    Foreground = Brushes.Black,
+                    Foreground = GetFilterForgroundColor(phoneme),
                     Background = GetFilterColor(phoneme),
                     Margin = new Thickness(1),
                     Padding = new Thickness(3)
@@ -129,6 +130,8 @@ public partial class PhonemicInventoryView : UserControl
             grid.Children.Add(stackPanel);
         }
     }
+
+ 
     private void OnPhonemePointerPressed(object sender, PointerPressedEventArgs e)
     {
         if (!e.GetCurrentPoint(this).Properties.IsRightButtonPressed) return;
@@ -141,6 +144,7 @@ public partial class PhonemicInventoryView : UserControl
         if (DataContext is not PhonemicInventoryViewModel vm) return;
 
         isRarityFilterActive = vm.IsRarityEnabled;
+        isSonorantFilterActive = vm.IsSonorantEnabled;
 
         ClearGrid(VowelGrid);
         ClearGrid(ConsonantGrid);
@@ -152,7 +156,7 @@ public partial class PhonemicInventoryView : UserControl
                            ["Close", "Near-close", "Close-mid", "Mid", "Open-mid", "Near-open", "Open"],
                            ["Front", "Central", "Back"]);
         GenerateGridLabels(ConsonantGrid,
-                           ["Plosive", "Nasal", "Trill", "Tap/Flap", "Fricative", "Lateral fricative", "Approximant", "Lateral approximant", "Click", "Ejective", "Implosive"],
+                           ["Plosive", "Nasals", "Trill", "Tap/Flap", "Fricative", "Lateral fricative", "Approximant", "Lateral approximant", "Click", "Ejective", "Implosive"],
                            ["Bialabial", "Labiodental", "Dental", "Alveolar", "Postalveolar", "Retroflex", "Palatal", "Velar", "Uvular", "Pharyngeal", "Glottal"]);
 
 
@@ -161,6 +165,7 @@ public partial class PhonemicInventoryView : UserControl
     #region Filters
 
      bool isRarityFilterActive;
+     bool isSonorantFilterActive;
     private IBrush GetRarityColor(byte rarity)
     {
         Color color;
@@ -193,6 +198,13 @@ public partial class PhonemicInventoryView : UserControl
         return new SolidColorBrush(color);
     }
 
+    private IBrush GetFilterForgroundColor(PhonemTemplate phoneme)
+    {
+        if (isSonorantFilterActive && phoneme.IsSonorant)
+            return Brushes.Fuchsia;
+
+        return Brushes.Black;
+    }
 
 
     private IBrush GetFilterColor(PhonemTemplate p)

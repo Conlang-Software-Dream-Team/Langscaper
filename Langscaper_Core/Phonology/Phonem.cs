@@ -96,7 +96,7 @@ namespace Phonology
             OpenBackRounded
         ];
 
-        public static ImmutableList<Phonem> vowels =
+        public static ImmutableList<Phonem> Vowels =
             close.Concat(nearClose)
                  .Concat(closeMid)
                  .Concat(mid)
@@ -559,7 +559,7 @@ namespace Phonology
             VoicedUvularPlosive,
 
             VoicelessGlottalPlosive];
-        public static ImmutableList<Phonem> Nasal =
+        public static ImmutableList<Phonem> Nasals =
         [
             VoicedBilabialNasal,
             VoicedLabioDentalNasal,
@@ -643,6 +643,21 @@ namespace Phonology
         public static ImmutableList<Phonem> Consonants = Pulmonics.Concat(NonPulmonics).ToImmutableList();
 
         #endregion
+
+        public static ImmutableList<Phonem> Liquids =
+        [
+            VoicedAlveolarLateralApproximant,
+            VoicedRetroflexLateralApproximant,
+            VoicedPalatalLateralApproximant,
+            VoicedVelarLateralApproximant,
+            VoicedAlveolarTap,
+            VoicedRetroflexTap,
+            VoicedAlveolarTrill,
+            VoicedRetroflexTrill,
+            VoicedUvularTrill,
+        ];
+        public static ImmutableList<Phonem> Glides = [VoicedPalatalApproximant,VoicedLabioVelarApproximant];
+        public static ImmutableList<Phonem> Sonorants = Vowels.Concat(Nasals).Concat(Liquids).Concat(Glides).ToImmutableList();
     }
 
 
@@ -732,6 +747,7 @@ namespace Phonology
         Liquid,
         Undefined
     }
+
 
 
     #endregion

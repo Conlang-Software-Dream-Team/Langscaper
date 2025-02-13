@@ -16,8 +16,15 @@ namespace Langscaper.ViewModels
 
         [ObservableProperty]
         private bool _isRarityEnabled;
+        
+        [ObservableProperty]
+        private bool _isSonorantEnabled;
 
         partial void OnIsRarityEnabledChanged(bool value)
+        {
+            RefreshGrids?.Invoke();
+        }
+        partial void OnIsSonorantEnabledChanged(bool value)
         {
             RefreshGrids?.Invoke();
         }
@@ -28,16 +35,13 @@ namespace Langscaper.ViewModels
         public PhonemicInventoryViewModel()
         {
             Vowels = new ObservableCollection<VowelsTemplate>(
-                Phonem.vowels.Select(p => new VowelsTemplate(p))
+                Phonem.Vowels.Select(p => new VowelsTemplate(p))
             );
 
             Consonants = new ObservableCollection<ConsonantTemplate>(
                 Phonem.Consonants.Select(p => new ConsonantTemplate(p))
 
             );
-
-
-
         }
 
     }
@@ -46,6 +50,7 @@ namespace Langscaper.ViewModels
     {
         public string Ipa { get; }
         public byte Rarity { get; }
+        public bool IsSonorant { get; }
         public int Row { get; }
         public int Column { get; }
 
@@ -56,6 +61,8 @@ namespace Langscaper.ViewModels
         {
             Ipa = p.ipa;
             Rarity = p.rarity;
+            IsSonorant = Phonem.Sonorants.Contains(p);
+
             Row = GetRow(p);
             Column = GetColumn(p);
             PlaySoundCommand = new RelayCommand(PlaySound);
@@ -109,7 +116,7 @@ namespace Langscaper.ViewModels
             return phonem switch
             {
                 _ when Phonem.Plosive.Contains(phonem) => 1,
-                _ when Phonem.Nasal.Contains(phonem) => 2,
+                _ when Phonem.Nasals.Contains(phonem) => 2,
                 _ when Phonem.Trill.Contains(phonem) => 3,
                 _ when Phonem.TapOrFlap.Contains(phonem) => 4,
                 _ when Phonem.Fricative.Contains(phonem) => 5,
