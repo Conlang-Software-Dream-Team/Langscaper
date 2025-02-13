@@ -2,31 +2,35 @@
 {
     public static class FileManager
     {
+        public static event Action<string>? OnErrorLogged;
 
         static FileManager()
         {
-            if (!Directory.Exists(AppSettings.AudioDirectory))
+            try
             {
-                throw new DirectoryNotFoundException($" Folder not founds :  {AppSettings.AudioDirectory}");
+                if (!Directory.Exists(AppSettings.AudioDirectory))
+                    throw new DirectoryNotFoundException($"[FileManager]Audio folder not founds at {AppSettings.AudioDirectory}");
+            }
+            catch(DirectoryNotFoundException e) 
+            {
+                OnErrorLogged?.Invoke(e.Message);
             }
         }
 
-        public static event Action<string>? OnErrorLogged;
 
-        public static string GetAudioFilePath(string fileName)
+        public static string GetAudioFileFullPath(string fileName)
         {
-
             try
             {
                 string fullPath = Path.Combine(AppSettings.AudioDirectory, fileName);
                 if (File.Exists(fullPath))
                     return fullPath;
 
-                throw new FileNotFoundException($"Files not founds : {fileName}");
+                throw new FileNotFoundException($"[FileManager] Audio files not founds : {fileName}");
             }
             catch (Exception e)
             {
-                OnErrorLogged?.Invoke($"[FileManager] Audio file {fileName} not founds : {e.Message}");
+                OnErrorLogged?.Invoke(e.Message);
                 return "";
             }
         }

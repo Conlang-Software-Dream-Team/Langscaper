@@ -9,23 +9,14 @@
 
             if (cache.ContainsKey(fileName))
                 return;
-            
-            var data = await File.ReadAllBytesAsync( fileName);
-             cache[fileName] = data;
+
+            var data = await File.ReadAllBytesAsync(fileName);
+            cache[fileName] = data;
         }
 
         public static byte[]? GetAudio(string fileName)
         {
             return cache.TryGetValue(fileName, out var data) ? data : null;
-        }
-
-        public static MemoryStream? GetAudioStream(string phoneme)
-        {
-            if (cache.TryGetValue(phoneme, out var data))
-            {
-                return new MemoryStream(data);
-            }
-            return null;
         }
     }
 }

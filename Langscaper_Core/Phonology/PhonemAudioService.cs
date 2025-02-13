@@ -3,10 +3,19 @@ using Langscaper_Core.ResourcesManager.FileSystem;
 
 namespace Langscaper_Core.Phonology
 {
+    public class AudioServiceProvider
+    {
+        public static void ConfigureServices()
+        {
+            var audioPlayer = new AudioPlayer();
+            PhonemeAudioService.Initialize(audioPlayer);
+        }
+    }
+
 
     public static class PhonemeAudioService
     {
-        public static readonly Dictionary<string, string> PhonemeToFile = new()
+        private static readonly Dictionary<string, string> PhonemeToFileName = new()
         {
             { "m", "IPA\\Bilabial_nasal.ogg" },
             { "ɱ", "IPA\\Labiodental_nasal.ogg" },
@@ -99,16 +108,24 @@ namespace Langscaper_Core.Phonology
         public static event Action<string>? OnErrorLogged;
 
 
-        public static void PlayPhoneme(string phoneme)
+        private static IAudioPlayer audioPlayer;
+
+        public static void Initialize(IAudioPlayer player)
+        {
+            audioPlayer = player;
+        }
+
+
+        public static void PlayPhoneme(string IPAkey)
         {
             try
             {
-                if (!PhonemeToFile.TryGetValue(phoneme, out string? fileName) || fileName is null)
+                if (!PhonemeToFileName.TryGetValue(IPAkey, out string? fileName) || fileName is null)
                 {
-                    throw new KeyNotFoundException($"[PhonemAudioService] No audio file found for the phoneme: {phoneme}");
+                    throw new KeyNotFoundException($"[PhonemAudioService] No path found for the IPA key: {IPAkey}");
                 }
-                string fullPath = FileManager.GetAudioFilePath(fileName);
-                AudioPlayer.PlayAudio(fullPath);
+                
+                audioPlayer.PlayAudio(FileManager.GetAudioFileFullPath(fileName));
             }
             catch (KeyNotFoundException e)
             {
