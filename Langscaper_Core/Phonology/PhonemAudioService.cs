@@ -6,7 +6,7 @@ namespace Langscaper_Core.Phonology
 
     public static class PhonemeAudioService
     {
-        private static readonly Dictionary<string, string> phonemeToFile = new()
+        public static readonly Dictionary<string, string> PhonemeToFile = new()
         {
             { "m", "IPA\\Bilabial_nasal.ogg" },
             { "ɱ", "IPA\\Labiodental_nasal.ogg" },
@@ -103,12 +103,12 @@ namespace Langscaper_Core.Phonology
         {
             try
             {
-                if (!phonemeToFile.TryGetValue(phoneme, out string? fileName) || fileName is null)
+                if (!PhonemeToFile.TryGetValue(phoneme, out string? fileName) || fileName is null)
                 {
                     throw new KeyNotFoundException($"[PhonemAudioService] No audio file found for the phoneme: {phoneme}");
                 }
-                string filePath = FileManager.GetAudioFilePath(fileName);
-                AudioPlayer.PlayAudio(filePath);
+                string fullPath = FileManager.GetAudioFilePath(fileName);
+                AudioPlayer.PlayAudio(fullPath);
             }
             catch (KeyNotFoundException e)
             {

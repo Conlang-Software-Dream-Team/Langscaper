@@ -1,30 +1,54 @@
-﻿using System.Diagnostics;
+﻿using NAudio.Vorbis;
+using NAudio.Wave;
+using Langscaper_Core.Phonology;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Langscaper_Core.ResourcesManager.Audio
 {
     public static class AudioPlayer
     {
-        public static void PlayAudio(string filePath)
+        public static async void PlayAudio(string fullPath)
         {
-            if (string.IsNullOrWhiteSpace(filePath)) return;
-            if (!File.Exists(filePath))
-                throw new FileNotFoundException($"Can't play audio, file not found: {filePath}");
+            if (string.IsNullOrWhiteSpace(fullPath)) return;
 
-            var vlcPath = AppSettings.VlcPath;
-            if (!File.Exists(vlcPath))
-                throw new FileNotFoundException($"VLC executable not found: {vlcPath}");
+            // Vérifier si l'audio est déjà dans le cache
+            byte[]? audioData = AudioCacheManager.GetAudio(fullPath);
 
-            var process = new Process
+            if (audioData == null)
             {
-                StartInfo = new ProcessStartInfo
+                // L'audio n'est pas dans le cache, donc on le charge
+                await AudioCacheManager.PreloadAudioAsync(fullPath); // On attend que le fichier soit chargé
+                audioData = AudioCacheManager.GetAudio(fullPath);
+            }
+
+            if (audioData != null)
+            {
+                // Créer un flux mémoire à partir des données audio
+                using (var stream = new MemoryStream(audioData))
                 {
-                    FileName = vlcPath,
-                    Arguments = $"-I dummy --no-repeat --no-loop --play-and-exit \"{filePath}\"",
-                    UseShellExecute = false,
-                    CreateNoWindow = true
+                    // Créer un lecteur Vorbis pour lire les fichiers OGG
+                    using (var reader = new VorbisWaveReader(stream))
+                    {
+                        // Créer un WaveOutEvent pour la lecture de l'audio
+                        using (var waveOut = new WaveOutEvent())
+                        {
+                            waveOut.Init(reader); // Initialiser le lecteur avec le flux audio
+                            waveOut.Play(); // Jouer l'audio
+                            while (waveOut.PlaybackState == PlaybackState.Playing)
+                            {
+                                // Attendre que l'audio se termine avant de continuer
+                                System.Threading.Thread.Sleep(100);
+                            }
+                        }
+                    }
                 }
-            };
-            process.Start();
+            }
+            else
+            {
+                throw new InvalidOperationException($"Unable to load audio for fullPath: {fullPath}");
+            }
         }
     }
 }
