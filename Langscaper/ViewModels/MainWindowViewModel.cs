@@ -8,8 +8,8 @@ using CommunityToolkit.Mvvm.Input;
 using CSP.Views;
 using Langscaper.ViewModels;
 using Langscaper.Views;
-using Langscaper_Core.Phonology;
-using Langscaper_Core.ResourcesManager.FileSystem;
+using Langscaper_Core.Services;
+using Langscaper_Core.System.FileSystem;
 using System;
 using System.Collections.ObjectModel;
 

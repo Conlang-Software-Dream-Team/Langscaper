@@ -1,4 +1,4 @@
-﻿namespace Langscaper_Core.ResourcesManager
+﻿namespace Langscaper_Core.System
 {
     public class AudioCacheManager
     {

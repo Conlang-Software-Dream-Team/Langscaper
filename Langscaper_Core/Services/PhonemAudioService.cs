@@ -1,7 +1,8 @@
-﻿using Langscaper_Core.ResourcesManager.Audio;
-using Langscaper_Core.ResourcesManager.FileSystem;
+﻿using Langscaper_Core.Contracts;
+using Langscaper_Core.Infra.Audio;
+using Langscaper_Core.System.FileSystem;
 
-namespace Langscaper_Core.Phonology
+namespace Langscaper_Core.Services
 {
     public class AudioServiceProvider
     {
@@ -124,7 +125,7 @@ namespace Langscaper_Core.Phonology
                 {
                     throw new KeyNotFoundException($"[PhonemAudioService] No path found for the IPA key: {IPAkey}");
                 }
-                
+
                 audioPlayer.PlayAudio(FileManager.GetAudioFileFullPath(fileName));
             }
             catch (KeyNotFoundException e)

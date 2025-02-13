@@ -1,4 +1,4 @@
-﻿namespace Langscaper_Core.ResourcesManager.FileSystem
+﻿namespace Langscaper_Core.System.FileSystem
 {
     public static class FileManager
     {
@@ -11,7 +11,7 @@
                 if (!Directory.Exists(AppSettings.AudioDirectory))
                     throw new DirectoryNotFoundException($"[FileManager]Audio folder not founds at {AppSettings.AudioDirectory}");
             }
-            catch(DirectoryNotFoundException e) 
+            catch (DirectoryNotFoundException e)
             {
                 OnErrorLogged?.Invoke(e.Message);
             }

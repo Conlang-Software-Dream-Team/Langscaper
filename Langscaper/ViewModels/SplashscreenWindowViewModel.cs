@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Avalonia.Threading;
 using CSP.ViewModels;
-using Langscaper_Core.Phonology;
+using Langscaper_Core.Services;
 
 namespace Langscaper.ViewModels
 {

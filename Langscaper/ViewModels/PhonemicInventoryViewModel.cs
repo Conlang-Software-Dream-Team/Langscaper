@@ -3,10 +3,10 @@ using System.Collections.ObjectModel;
 using Phonology;
 using System.Linq;
 using System.Windows.Input;
-using Langscaper_Core.Phonology;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
+using Langscaper_Core.Services;
 
 namespace Langscaper.ViewModels
 {

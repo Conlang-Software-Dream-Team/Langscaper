@@ -1,14 +1,11 @@
-﻿using NAudio.Vorbis;
+﻿using Langscaper_Core.Contracts;
+using Langscaper_Core.System;
+using NAudio.Vorbis;
 using NAudio.Wave;
 using System.Diagnostics;
 
-namespace Langscaper_Core.ResourcesManager.Audio
+namespace Langscaper_Core.Infra.Audio
 {
-    public interface IAudioPlayer
-    {
-        Task PlayAudio(string fullPath);
-    }
-
     public class AudioPlayer : IAudioPlayer
     {
         public async Task PlayAudio(string fullPath)
