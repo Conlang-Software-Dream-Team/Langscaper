@@ -30,14 +30,14 @@ namespace Langscaper_Core.Phonology.Diacritics
         Centralized,    
         MidCentralized
     } 
-    public enum PhonationDiacritic
+    public enum PhonationProcess
     {
         Voiceless,
         Voiced,
         BreathyVoiced,
         CreakyVoiced
     }
-    public enum ReleaseNasalization
+    public enum OronasalProcess
     {
         Aspirated,
         Nasalized,

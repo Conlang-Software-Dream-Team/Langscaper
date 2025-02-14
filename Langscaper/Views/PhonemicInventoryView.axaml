@@ -12,40 +12,122 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:PhonemicInventoryViewModel/>
   </Design.DataContext>
-  
   <DockPanel>
 
+    <!-- Options en haut -->
     <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Background="AntiqueWhite">
       <ListBoxItem>See all</ListBoxItem>
       <ToggleButton IsChecked="{Binding IsRarityEnabled}">Rarity</ToggleButton>
       <ToggleButton IsChecked="{Binding IsSonorantEnabled}">Sonorant</ToggleButton>
-      <!--<ToggleButton IsChecked="{Binding IsPhonationEnabled}">Phonation</ToggleButton>
-      <ToggleButton IsChecked="{Binding IsPossibilityEnabled}">Possibility</ToggleButton>-->
       <ListBoxItem>Custom filter</ListBoxItem>
     </StackPanel>
 
 
-    <UserControl>
+    <SplitView IsPaneOpen="True"
+               OpenPaneLength="300"
+               CompactPaneLength="0"
+               PaneBackground="AliceBlue"
+               PanePlacement="Right"
+               DisplayMode="CompactInline">
+      <SplitView.Pane>
 
-    </UserControl>
+        <StackPanel>
+          <Button HorizontalAlignment="Right">
+            <PathIcon Data="{StaticResource line_horizontal_3_regular}"/>
+          </Button>
 
-    <StackPanel Margin="10" Orientation="Vertical">
-      <StackPanel>
-        <TextBlock FontSize="20">Consonants</TextBlock>
-        <Border HorizontalAlignment="Left"  CornerRadius="10" Background="PaleGoldenrod" Margin="5" MaxHeight="400">
-          <Grid x:Name="ConsonantGrid"/>
-        </Border>
-      </StackPanel>
+          <StackPanel Margin="10" Orientation="Vertical">
+            <TextBlock Padding="5,0,0,5" TextAlignment="Center" FontSize="30">∂</TextBlock>
+            <TextBlock Padding="5,5,0,5" TextAlignment="Center" FontSize="18">name of the phoneme</TextBlock>
+          </StackPanel>
 
-      <StackPanel>
-        <TextBlock FontSize="20">Vowels</TextBlock>
-        <Border HorizontalAlignment="Left"  CornerRadius="10" Background="BurlyWood" Margin="5" MaxHeight="300">
-          <Grid x:Name="VowelGrid"/>
-        </Border>
-      </StackPanel>
-    </StackPanel>
+          <TextBlock Padding="5,5,0,5" >Graphemes (use , as a separator)</TextBlock>
+          <TextBox Margin="15,0,15,5" FontSize="12">k, qu</TextBox>
+
+          <TextBlock Padding="8,5,0,5" FontSize="15">Diacritics</TextBlock>
+
+          <StackPanel Margin="10" Orientation="Horizontal">
+            <StackPanel Margin="10" Orientation="Vertical">
+              <TextBlock Padding="5,5,0,5" FontSize="12">Phonation</TextBlock>
+              <ComboBox/>
+            </StackPanel>
+
+            <StackPanel Margin="10" Orientation="Vertical">
+              <TextBlock Padding="5,5,0,5" FontSize="12">Oro-nasal process</TextBlock>
+              <ComboBox/>
+            </StackPanel>
+          </StackPanel>
+
+          <StackPanel Margin="10" Orientation="Horizontal">
+            <StackPanel Margin="10" Orientation="Vertical">
+              <TextBlock Padding="5,5,0,5" FontSize="12">Articulation place</TextBlock>
+              <ComboBox/>
+            </StackPanel>
+
+            <StackPanel Margin="10" Orientation="Vertical">
+              <TextBlock Padding="5,5,0,5" FontSize="12">Manner of articulation</TextBlock>
+              <ComboBox/>
+            </StackPanel>
+          </StackPanel>
+
+          <StackPanel Margin="10" Orientation="Horizontal">
+            <StackPanel Margin="10" Orientation="Vertical">
+              <TextBlock Padding="5,5,0,5" FontSize="12">Tongue position</TextBlock>
+              <ComboBox/>
+            </StackPanel>
+
+            <StackPanel Margin="10" Orientation="Vertical">
+              <TextBlock Padding="5,5,0,5" FontSize="12">Tongue root position</TextBlock>
+              <ComboBox/>
+            </StackPanel>
+          </StackPanel>
+
+          <StackPanel Margin="10" Orientation="Horizontal">
+            <StackPanel Margin="10" Orientation="Vertical">
+              <TextBlock Padding="5,5,0,5" FontSize="12">Rounding</TextBlock>
+              <ComboBox/>
+            </StackPanel>
+
+            <StackPanel Margin="10" Orientation="Vertical">
+              <TextBlock Padding="5,5,0,5" FontSize="12">Syllabic role</TextBlock>
+              <ComboBox/>
+            </StackPanel>
+          </StackPanel>
+
+          <StackPanel Orientation="Horizontal" Margin="10" Spacing="10">
+            <Button>Save</Button>
+            <Button>Add new</Button>
+            <Button>Remove</Button>
+          </StackPanel>
+
+        </StackPanel>
+      </SplitView.Pane>
+
+      <SplitView.Content>
+
+        <!-- Main Content -->
+        <Grid>
+          <StackPanel Margin="10" Orientation="Vertical">
+            <StackPanel>
+              <TextBlock FontSize="20">Consonants</TextBlock>
+              <Border HorizontalAlignment="Left" CornerRadius="10" Background="PaleGoldenrod" Margin="5" MaxHeight="400">
+                <Grid x:Name="ConsonantGrid"/>
+              </Border>
+            </StackPanel>
+
+            <StackPanel>
+              <TextBlock FontSize="20">Vowels</TextBlock>
+              <Border HorizontalAlignment="Left" CornerRadius="10" Background="BurlyWood" Margin="5" MaxHeight="300">
+                <Grid x:Name="VowelGrid"/>
+              </Border>
+            </StackPanel>
+          </StackPanel>
+        </Grid>
+
+      </SplitView.Content>
+    </SplitView>
+
 
 
   </DockPanel>
-
 </UserControl>
