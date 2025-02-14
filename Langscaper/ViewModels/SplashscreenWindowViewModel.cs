@@ -1,8 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using Avalonia.Threading;
+﻿using Avalonia.Threading;
 using CSP.ViewModels;
+using Langscaper_Core;
+using Langscaper_Core.Infra.Audio;
 using Langscaper_Core.Services;
+using Langscaper_Core.System.FileSystem;
+using System;
+using System.Threading.Tasks;
 
 namespace Langscaper.ViewModels
 {
@@ -25,7 +28,11 @@ namespace Langscaper.ViewModels
 
         private async void InitializeAsync()
         {
-            AudioServiceProvider.ConfigureServices();
+
+
+            var audioPlayer = new AudioPlayer();
+            var fileManager = new FileManager(AppSettings.AudioDirectory);
+            AudioServiceProvider.ConfigureServices(audioPlayer, fileManager);
 
             // Simulation d'un chargement
             await Task.Run(async () =>

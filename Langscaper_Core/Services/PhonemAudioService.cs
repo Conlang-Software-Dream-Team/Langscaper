@@ -1,15 +1,12 @@
 ﻿using Langscaper_Core.Contracts;
-using Langscaper_Core.Infra.Audio;
-using Langscaper_Core.System.FileSystem;
 
 namespace Langscaper_Core.Services
 {
     public class AudioServiceProvider
     {
-        public static void ConfigureServices()
+        public static void ConfigureServices(IAudioPlayer audioPlayer, IFileManager fileManager)
         {
-            var audioPlayer = new AudioPlayer();
-            PhonemeAudioService.Initialize(audioPlayer);
+            PhonemeAudioService.Initialize(audioPlayer, fileManager);
         }
     }
 
@@ -108,12 +105,13 @@ namespace Langscaper_Core.Services
 
         public static event Action<string>? OnErrorLogged;
 
-
+        private static IFileManager fileManager;
         private static IAudioPlayer audioPlayer;
 
-        public static void Initialize(IAudioPlayer player)
+        public static void Initialize(IAudioPlayer player, IFileManager manager)
         {
             audioPlayer = player;
+            fileManager = manager;
         }
 
 
@@ -126,7 +124,7 @@ namespace Langscaper_Core.Services
                     throw new KeyNotFoundException($"[PhonemAudioService] No path found for the IPA key: {IPAkey}");
                 }
 
-                audioPlayer.PlayAudio(FileManager.GetAudioFileFullPath(fileName));
+                audioPlayer.PlayAudio(fileManager.GetAudioFileFullPath(fileName));
             }
             catch (KeyNotFoundException e)
             {

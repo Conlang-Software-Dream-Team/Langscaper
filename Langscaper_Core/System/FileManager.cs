@@ -1,15 +1,19 @@
-﻿namespace Langscaper_Core.System.FileSystem
-{
-    public static class FileManager
-    {
-        public static event Action<string>? OnErrorLogged;
+﻿using Langscaper_Core.Contracts;
 
-        static FileManager()
+namespace Langscaper_Core.System.FileSystem
+{
+    public class FileManager : IFileManager
+    {
+        public event Action<string>? OnErrorLogged;
+        private readonly string? audioDirectory;
+
+        public FileManager(string audioDirectoryPath)
         {
             try
             {
-                if (!Directory.Exists(AppSettings.AudioDirectory))
-                    throw new DirectoryNotFoundException($"[FileManager]Audio folder not founds at {AppSettings.AudioDirectory}");
+                if (!Directory.Exists(audioDirectoryPath))
+                    throw new DirectoryNotFoundException($"[FileManager] Audio folder not founds at {AppSettings.AudioDirectory}");
+                audioDirectory = audioDirectoryPath;
             }
             catch (DirectoryNotFoundException e)
             {
@@ -18,11 +22,12 @@
         }
 
 
-        public static string GetAudioFileFullPath(string fileName)
+
+        public string GetAudioFileFullPath(string fileName)
         {
             try
             {
-                string fullPath = Path.Combine(AppSettings.AudioDirectory, fileName);
+                string fullPath = Path.Combine(audioDirectory, fileName);
                 if (File.Exists(fullPath))
                     return fullPath;
 
@@ -35,12 +40,12 @@
             }
         }
 
-        public static void WriteToFile(string filePath, string content)
+        public void WriteToFile(string filePath, string content)
         {
             File.WriteAllText(filePath, content);
         }
 
-        public static string ReadFromFile(string filePath)
+        public string ReadFromFile(string filePath)
         {
             return File.Exists(filePath) ? File.ReadAllText(filePath) : string.Empty;
         }

@@ -454,7 +454,7 @@ namespace Langscaper_Core.Phonology
 
 
         // Manner of articulation
-        public static ImmutableList<Phoneme> Plosive = [ 
+        public static ImmutableList<Phoneme> Plosive = [
             Phoneme.VoicelessBilabialPlosive,
             Phoneme.VoicedBilabialPlosive,
 

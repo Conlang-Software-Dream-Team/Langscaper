@@ -18,18 +18,18 @@ namespace Langscaper_Core.Phonology.Diacritics
     public enum MannerModification
     {
         Labialized,
-        Palatalized,     
-        Velarized,       
-        Pharyngealized,  
+        Palatalized,
+        Velarized,
+        Pharyngealized,
         Glottalized
     }
     public enum TonguePosition
     {
-        Advanced,        
-        Retracted,      
-        Centralized,    
+        Advanced,
+        Retracted,
+        Centralized,
         MidCentralized
-    } 
+    }
     public enum PhonationProcess
     {
         Voiceless,

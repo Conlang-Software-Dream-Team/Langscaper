@@ -2,7 +2,7 @@
 
 namespace Langscaper.ViewModels
 {
-    internal class SyntaxViewModel :ViewModelBase
+    internal class SyntaxViewModel : ViewModelBase
     {
     }
 }

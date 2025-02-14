@@ -1,13 +1,13 @@
-﻿using CSP.ViewModels;
-using System.Collections.ObjectModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CSP.ViewModels;
 using Langscaper_Core.Phonology;
+using Langscaper_Core.Phonology.Diacritics;
+using Langscaper_Core.Services;
+using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using Langscaper_Core.Services;
-using Langscaper_Core.Phonology.Diacritics;
 
 namespace Langscaper.ViewModels
 {
@@ -88,7 +88,7 @@ namespace Langscaper.ViewModels
     {
         public RoundnessModification roundnessModification;
         public TongueRootPosition tongueRootPosition;
-        public TonguePosition tonguePosition; 
+        public TonguePosition tonguePosition;
 
         public VowelsTemplate(Phoneme p) : base(p) { }
 
@@ -121,7 +121,7 @@ namespace Langscaper.ViewModels
     public class ConsonantTemplate : PhonemTemplate
     {
         public MannerModification mannerModification;
-        public PhonationProcess phonationDiacritic; 
+        public PhonationProcess phonationDiacritic;
         public OronasalProcess releaseNasalization;
 
         public ConsonantTemplate(Phoneme p) : base(p) { }

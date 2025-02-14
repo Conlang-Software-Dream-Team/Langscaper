@@ -4,8 +4,6 @@ using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Langscaper.ViewModels;
-using Langscaper_Core.Phonology;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,7 +14,7 @@ public partial class PhonemicInventoryView : UserControl
     public PhonemicInventoryView()
     {
         InitializeComponent();
-        DataContextChanged += (s, e) => 
+        DataContextChanged += (s, e) =>
         {
             if (DataContext is not PhonemicInventoryViewModel vm) return;
             vm.RefreshGrids += SetupGrids;
@@ -131,7 +129,7 @@ public partial class PhonemicInventoryView : UserControl
         }
     }
 
- 
+
     private void OnPhonemePointerPressed(object sender, PointerPressedEventArgs e)
     {
         if (!e.GetCurrentPoint(this).Properties.IsRightButtonPressed) return;
@@ -164,8 +162,8 @@ public partial class PhonemicInventoryView : UserControl
 
     #region Filters
 
-     bool isRarityFilterActive;
-     bool isSonorantFilterActive;
+    bool isRarityFilterActive;
+    bool isSonorantFilterActive;
     private IBrush GetRarityColor(byte rarity)
     {
         Color color;
@@ -209,10 +207,10 @@ public partial class PhonemicInventoryView : UserControl
 
     private IBrush GetFilterColor(PhonemTemplate p)
     {
-        if(isRarityFilterActive)
+        if (isRarityFilterActive)
             return GetRarityColor(p.Rarity);
 
-        return Brushes.Transparent; 
+        return Brushes.Transparent;
 
     }
 
