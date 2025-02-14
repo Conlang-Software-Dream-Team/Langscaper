@@ -1,5 +1,4 @@
 ﻿using Langscaper_Core.Contracts;
-using Langscaper_Core.System;
 using NAudio.Vorbis;
 using NAudio.Wave;
 using System.Diagnostics;
@@ -8,16 +7,23 @@ namespace Langscaper_Core.Infra.Audio
 {
     public class AudioPlayer : IAudioPlayer
     {
+        private AudioCacheManager cacheManager;
+
+        public AudioPlayer(AudioCacheManager audioCachemanager)
+        {
+            cacheManager = audioCachemanager;
+        }
+
         public async Task PlayAudio(string fullPath)
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(fullPath), $"[AudioPlayer] Path can't be null");
 
-            byte[]? audioData = AudioCacheManager.GetAudio(fullPath);
+            byte[]? audioData = cacheManager.GetAudio(fullPath);
 
             if (audioData == null)
             {
-                await AudioCacheManager.PreloadAudioAsync(fullPath);
-                audioData = AudioCacheManager.GetAudio(fullPath);
+                await cacheManager.PreloadAudioAsync(fullPath);
+                audioData = cacheManager.GetAudio(fullPath);
             }
 
             if (audioData != null)

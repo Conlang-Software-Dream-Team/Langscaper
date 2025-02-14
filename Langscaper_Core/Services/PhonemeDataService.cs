@@ -2,9 +2,9 @@
 
 namespace Langscaper_Core.Services
 {
-    public static class PhonemeNotationService
+    public class PhonemeDataService
     {
-        public static readonly Dictionary<Phoneme, string> PhonemeToIPA = new()
+        public readonly Dictionary<Phoneme, string> PhonemeToIPA = new()
         {
             { Phoneme.VoicedBilabialNasal, "m" },
             { Phoneme.VoicedLabioDentalNasal, "ɱ" },
@@ -87,5 +87,92 @@ namespace Langscaper_Core.Services
             { Phoneme.OpenBackUnrounded , "ɑ" },
             { Phoneme.OpenBackRounded , "ɒ" }
         };
+
+        // rarity from https://phoible.org/parameters
+        public readonly Dictionary<Phoneme, byte> PhonemeToRarity = new()
+        {
+            { Phoneme.VoicedBilabialNasal, 1 },
+            { Phoneme.VoicedLabioDentalNasal, 3 },
+            { Phoneme.VoicedAlveolarNasal, 1 },
+            { Phoneme.VoicedRetroflexNasal, 4 },
+            { Phoneme.VoicedPalatalNasal, 3 },
+            { Phoneme.VoicedVelarNasal, 2 },
+            { Phoneme.VoicedUvularNasal, 5 },
+            { Phoneme.VoicelessBilabialPlosive, 1 },
+            { Phoneme.VoicedBilabialPlosive, 1 },
+            { Phoneme.VoicelessAlveolarPlosive, 1 },
+            { Phoneme.VoicedAlveolarPlosive, 1 },
+            { Phoneme.VoicelessRetroflexPlosive, 4 },
+            { Phoneme.VoicedRetroflexPlosive, 4 },
+            { Phoneme.VoicelessPalatalPlosive, 5 },
+            { Phoneme.VoicedPalatalPlosive, 5 },
+            { Phoneme.VoicelessVelarPlosive, 1 },
+            { Phoneme.VoicedVelarPlosive, 1 },
+            { Phoneme.VoicelessUvularPlosive, 5 },
+            { Phoneme.VoicedUvularPlosive, 5 },
+            { Phoneme.VoicelessGlottalPlosive, 3 },
+            { Phoneme.VoicelessBilabialFricative, 4 },
+            { Phoneme.VoicedBilabialFricative, 4 },
+            { Phoneme.VoicelessLabioDentalFricative, 1 },
+            { Phoneme.VoicedLabioDentalFricative, 1 },
+            { Phoneme.VoicelessDentalFricative, 2 },
+            { Phoneme.VoicedDentalFricative, 2 },
+            { Phoneme.VoicelessAlveolarFricative, 1 },
+            { Phoneme.VoicedAlveolarFricative, 1 },
+            { Phoneme.VoicelessPostAlveolarSibilantFricative, 2 },
+            { Phoneme.VoicedPostAlveolarSibilantFricative, 2 },
+            { Phoneme.VoicelessRetroflexFricative, 4 },
+            { Phoneme.VoicedRetroflexFricative, 4 },
+            { Phoneme.VoicelessPalatalFricative, 4 },
+            { Phoneme.VoicedPalatalFricative, 4 },
+            { Phoneme.VoicelessVelarFricative, 2 },
+            { Phoneme.VoicedVelarFricative, 2 },
+            { Phoneme.VoicelessUvularFricative, 4 },
+            { Phoneme.VoicedUvularFricative, 4 },
+            { Phoneme.VoicelessPharyngealFricative, 5 },
+            { Phoneme.VoicedPharyngealFricative, 5 },
+            { Phoneme.VoicelessGlottalFricative, 1 },
+            { Phoneme.VoicedGlottalFricative, 3 },
+            { Phoneme.VoicedLabioDentalApproximant, 3 },
+            { Phoneme.VoicedAlveolarApproximant, 2 },
+            { Phoneme.VoicedRetroflexApproximant, 4 },
+            { Phoneme.VoicedPalatalApproximant, 1 },
+            { Phoneme.VoicedLabioVelarApproximant, 1 },
+            { Phoneme.VoicedVelarApproximant, 4 },
+            { Phoneme.VoicedBilabialTrill, 5 },
+            { Phoneme.VoicedAlveolarTrill, 2 },
+            { Phoneme.VoicedUvularTrill, 4 },
+            { Phoneme.Voicedlabiodentalflap, 5 },
+            { Phoneme.VoicedAlveolarTap, 2 },
+            { Phoneme.VoicedRetroflexTap, 5 },
+            { Phoneme.VoicelessAlveolarLateralFricative, 5 },
+            { Phoneme.VoicedAlveolarLateralFricative, 5 },
+            { Phoneme.VoicedAlveolarLateralApproximant, 1 },
+            { Phoneme.VoicedRetroflexLateralApproximant, 4 },
+            { Phoneme.VoicedPalatalLateralApproximant, 5 },
+            { Phoneme.VoicedVelarLateralApproximant, 5 },
+            { Phoneme.CloseFrontUnrounded, 1 },
+            { Phoneme.CloseFrontRounded, 2 },
+            { Phoneme.CloseCentralUnrounded, 4 },
+            { Phoneme.CloseCentralRounded, 5 },
+            { Phoneme.CloseBackUnrounded, 4 },
+            { Phoneme.CloseBackRounded, 1 },
+            { Phoneme.NearCloseFrontUnrounded, 1 },
+            { Phoneme.NearCloseFrontRounded, 3 },
+            { Phoneme.NearCloseBackRounded, 2 },
+            { Phoneme.CloseMidFrontUnrounded, 1 },
+            { Phoneme.CloseMidFrontRounded, 2 },
+            { Phoneme.MidCentral, 1 },
+            { Phoneme.OpenMidFrontUnrounded, 2 },
+            { Phoneme.OpenMidFrontRounded, 3 },
+            { Phoneme.OpenMidBackUnrounded, 3 },
+            { Phoneme.OpenMidBackRounded, 2 },
+            { Phoneme.NearOpenFrontUnrounded, 2 },
+            { Phoneme.OpenFrontUnrounded, 1 },
+            { Phoneme.OpenBackUnrounded, 1 },
+            { Phoneme.OpenBackRounded, 3 }
+        };
+
+
     }
 }

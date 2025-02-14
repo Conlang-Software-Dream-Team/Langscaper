@@ -4,7 +4,6 @@ namespace Langscaper_Core.Phonology
 {
 
     // From https://en.wikipedia.org/wiki/Table_of_vowels
-    // rarity from https://phoible.org/parameters
 
 
     public enum Phoneme
@@ -142,9 +141,6 @@ namespace Langscaper_Core.Phonology
         Voicedlabiodentalflap,
         VoicedLabioVelarApproximant,
     }
-
-
-
 
     public static class PhonemeCategories
     {

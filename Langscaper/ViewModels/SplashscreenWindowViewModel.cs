@@ -1,6 +1,7 @@
 ﻿using Avalonia.Threading;
 using CSP.ViewModels;
 using Langscaper_Core;
+using Langscaper_Core.Infra;
 using Langscaper_Core.Infra.Audio;
 using Langscaper_Core.Services;
 using Langscaper_Core.System.FileSystem;
@@ -11,45 +12,52 @@ namespace Langscaper.ViewModels
 {
     public class SplashscreenWindowViewModel : ViewModelBase
     {
-        private readonly Action _onLoadingComplete;
-        private double _progress;
+        private readonly Action onLoadingComplete;
+        private double progress;
 
         public double Progress
         {
-            get => _progress;
-            set => SetProperty(ref _progress, value);
+            get => progress;
+            set => SetProperty(ref progress, value);
         }
 
         public SplashscreenWindowViewModel(Action onLoadingComplete)
         {
-            _onLoadingComplete = onLoadingComplete;
+            this.onLoadingComplete = onLoadingComplete;
             InitializeAsync();
         }
 
-        private async void InitializeAsync()
+        private async Task InitializeAsync()
         {
+            var progress = new Progress<int>(value => Progress = value);
+            int step = 0;
+            int totalSteps = 4; // Nombre d'étapes réelles
 
-
-            var audioPlayer = new AudioPlayer();
-            var fileManager = new FileManager(AppSettings.AudioDirectory);
-            AudioServiceProvider.ConfigureServices(audioPlayer, fileManager);
-
-            // Simulation d'un chargement
             await Task.Run(async () =>
             {
-                for (int i = 0; i <= 100; i += 5)
-                {
-                    Progress = i;
-                    await Task.Delay(100);
-                }
-            });
+                var audioCacheManager = new AudioCacheManager();
+                step++;
+                ((IProgress<int>)progress).Report((step * 100) / totalSteps);
 
-            await Task.Delay(500); // Pause avant d'afficher la MainWindow
+                var audioPlayer = new AudioPlayer(audioCacheManager);
+                step++;
+                ((IProgress<int>)progress).Report((step * 100) / totalSteps);
+
+                var fileManager = new FileManager(AppSettings.AudioDirectory);
+                AudioServiceProvider.ConfigureServices(audioPlayer, fileManager);
+                step++;
+                ((IProgress<int>)progress).Report((step * 100) / totalSteps);
+
+                await Task.Delay(500); // Pause avant d'afficher la MainWindow
+                step++;
+                ((IProgress<int>)progress).Report((step * 100) / totalSteps);
+            });
 
             Dispatcher.UIThread.Post(() =>
             {
-                _onLoadingComplete?.Invoke();
+                onLoadingComplete?.Invoke();
             });
         }
+
     }
 }

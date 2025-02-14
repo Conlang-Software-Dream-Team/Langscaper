@@ -35,12 +35,14 @@ namespace Langscaper.ViewModels
 
         public PhonemicInventoryViewModel()
         {
+            var dataService = new PhonemeDataService();
+
             Vowels = new ObservableCollection<VowelsTemplate>(
-                PhonemeCategories.Vowels.Select(p => new VowelsTemplate(p))
+                PhonemeCategories.Vowels.Select(p => new VowelsTemplate(p, dataService))
             );
 
             Consonants = new ObservableCollection<ConsonantTemplate>(
-                PhonemeCategories.Consonants.Select(p => new ConsonantTemplate(p))
+                PhonemeCategories.Consonants.Select(p => new ConsonantTemplate(p, dataService))
 
             );
         }
@@ -56,18 +58,20 @@ namespace Langscaper.ViewModels
         public ArticulationPlaceModification articulationPlaceModification;
         public SyllabicRole syllabicRole { get; }
 
+        private PhonemeDataService phonemeDataService;
 
         public int Row { get; }
         public int Column { get; }
 
         public ICommand PlaySoundCommand { get; }
 
-        public PhonemTemplate(Phoneme p)
+        public PhonemTemplate(Phoneme p, PhonemeDataService dataService)
         {
-            PhonemeNotationService.PhonemeToIPA.TryGetValue(p, out var ipa);
+            phonemeDataService = dataService;
+            phonemeDataService.PhonemeToIPA.TryGetValue(p, out var ipa);
             Ipa = ipa;
 
-            PhonemeRarityService.PhonemeToRarity.TryGetValue(p, out var rarity);
+            phonemeDataService.PhonemeToRarity.TryGetValue(p, out var rarity);
             Rarity = rarity;
             IsSonorant = PhonemeCategories.Sonorants.Contains(p);
 
@@ -90,7 +94,7 @@ namespace Langscaper.ViewModels
         public TongueRootPosition tongueRootPosition;
         public TonguePosition tonguePosition;
 
-        public VowelsTemplate(Phoneme p) : base(p) { }
+        public VowelsTemplate(Phoneme p, PhonemeDataService ds) : base(p,ds) { }
 
         protected override int GetRow(Phoneme phonem)
         {
@@ -124,7 +128,7 @@ namespace Langscaper.ViewModels
         public PhonationProcess phonationDiacritic;
         public OronasalProcess releaseNasalization;
 
-        public ConsonantTemplate(Phoneme p) : base(p) { }
+        public ConsonantTemplate(Phoneme p, PhonemeDataService ds) : base(p, ds) { }
 
         protected override int GetRow(Phoneme phonem)
         {
