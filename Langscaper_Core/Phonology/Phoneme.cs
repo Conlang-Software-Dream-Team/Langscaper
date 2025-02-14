@@ -147,7 +147,7 @@ namespace Langscaper_Core.Phonology
         // Height (rows)
         public static ImmutableList<Phoneme> close =
          [
-                Phoneme.CloseFrontUnrounded,
+            Phoneme.CloseFrontUnrounded,
             Phoneme.CloseFrontRounded,
             Phoneme.CloseCentralUnrounded,
             Phoneme.CloseCentralRounded,

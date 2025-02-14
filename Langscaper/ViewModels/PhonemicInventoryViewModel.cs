@@ -56,7 +56,7 @@ namespace Langscaper.ViewModels
         public bool IsSonorant { get; }
 
         public ArticulationPlaceModification articulationPlaceModification;
-        public SyllabicRole syllabicRole { get; }
+        public SyllabicRoleModification syllabicRole { get; }
 
         private PhonemeDataService phonemeDataService;
 
@@ -91,8 +91,8 @@ namespace Langscaper.ViewModels
     public class VowelsTemplate : PhonemTemplate
     {
         public RoundnessModification roundnessModification;
-        public TongueRootPosition tongueRootPosition;
-        public TonguePosition tonguePosition;
+        public TongueRootPositionModification tongueRootPosition;
+        public TonguePositionModification tonguePosition;
 
         public VowelsTemplate(Phoneme p, PhonemeDataService ds) : base(p,ds) { }
 
@@ -125,8 +125,8 @@ namespace Langscaper.ViewModels
     public class ConsonantTemplate : PhonemTemplate
     {
         public MannerModification mannerModification;
-        public PhonationProcess phonationDiacritic;
-        public OronasalProcess releaseNasalization;
+        public PhonationModification phonationDiacritic;
+        public OronasalProcessModification releaseNasalization;
 
         public ConsonantTemplate(Phoneme p, PhonemeDataService ds) : base(p, ds) { }
 

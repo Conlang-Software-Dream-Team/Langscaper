@@ -8,36 +8,38 @@ namespace Langscaper_Core.Phonology.Diacritics
         Dental,
         Apical,
         Laminal,
-        Linguolabial
-    }
-    public enum RoundnessModification
-    {
-        MoreRounded,
-        LessRounded
-    }
-    public enum MannerModification
-    {
+        Linguolabial,
         Labialized,
         Palatalized,
         Velarized,
         Pharyngealized,
-        Glottalized
+        Glottalized,
+        None
     }
-    public enum TonguePosition
+    public enum RoundnessModification
+    {
+        MoreRounded,
+        LessRounded,
+        None
+    }
+  
+    public enum TonguePositionModification
     {
         Advanced,
         Retracted,
         Centralized,
-        MidCentralized
+        MidCentralized,
+        None
     }
-    public enum PhonationProcess
+    public enum PhonationModification
     {
         Voiceless,
         Voiced,
         BreathyVoiced,
-        CreakyVoiced
+        CreakyVoiced,
+        None
     }
-    public enum OronasalProcess
+    public enum OronasalProcessModification
     {
         Aspirated,
         Nasalized,
@@ -45,16 +47,18 @@ namespace Langscaper_Core.Phonology.Diacritics
         LateralRelease,
         NoAudibleRelease
     }
-    public enum TongueRootPosition
+    public enum TongueRootPositionModification
     {
         AdvancedTongueRoot,
         RetractedTongueRoot,
         Raised,
-        Lowered
+        Lowered,
+        None
     }
-    public enum SyllabicRole
+    public enum SyllabicRoleModification
     {
         Syllabic,
-        NonSyllabic
+        NonSyllabic,
+        None
     }
 }
