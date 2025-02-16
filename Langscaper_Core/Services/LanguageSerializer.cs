@@ -12,11 +12,8 @@ namespace Langscaper_Core.Services
             if (language == null)
                 throw new ArgumentNullException(nameof(language));
 
-            string fileName = $"{language.Name}{FileExtension}";
-            string filePath = Path.Combine(directory, fileName);
-
             string json = JsonSerializer.Serialize(language, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(filePath, json);
+            File.WriteAllText(directory, json);
         }
 
         public static LanguageModel Deserialize(string filePath)

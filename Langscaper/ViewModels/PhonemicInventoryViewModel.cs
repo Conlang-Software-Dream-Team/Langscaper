@@ -124,7 +124,6 @@ namespace Langscaper.ViewModels
 
     public class ConsonantTemplate : PhonemTemplate
     {
-        public MannerModification mannerModification;
         public PhonationModification phonationDiacritic;
         public OronasalProcessModification releaseNasalization;
 

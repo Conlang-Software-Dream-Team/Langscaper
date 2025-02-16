@@ -25,7 +25,7 @@ namespace Langascaper.Test
             string filePath = "TestLang.conlang";
 
             // Sérialisation de l'objet en fichier
-            LanguageSerializer.Serialize(language, "");
+            LanguageSerializer.Serialize(language, "TestLang.Conlang");
 
             // Vérification que le fichier a bien été créé
             Assert.True(File.Exists(filePath));

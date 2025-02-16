@@ -10,91 +10,72 @@
         Title="Langscaper">
 
   <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainWindowViewModel/>
   </Design.DataContext>
 
-
   <DockPanel>
+    <!-- Menu en haut -->
     <Menu Background="AliceBlue" DockPanel.Dock="Top">
-      <MenuItem Header="{Binding ConlangName}" Command="{ Binding GoToHomePage}"/>
+      <MenuItem Header="{Binding ConlangName}" Command="{Binding GoToHomePage}" />
       <MenuItem Header="_File">
-        <MenuItem Header="_Save" InputGesture="ctrl+s"/>
-        <MenuItem Header="_Save as" InputGesture="ctrl+shift+s"/>
+        <MenuItem Header="_Save" Command="{Binding SaveProjectCommand}" />
+        <MenuItem Header="_Save as" Command="{Binding SaveAsProjectCommand}"/>
         <Separator/>
-        <MenuItem Header="_New language"/>
+        <MenuItem Header="_New language" />
         <Separator/>
-        <MenuItem Header="_Open" InputGesture="ctrl+o"/>
-        <MenuItem Header="_Open recent"/>
+        <MenuItem Header="_Open" />
+        <MenuItem Header="_Open recent" />
         <Separator/>
-        <MenuItem Header="_Settings..." Command="{Binding OpenSettings}" InputGesture="ctrl+p"/>
-        <MenuItem Header="_Language settings..." InputGesture="ctrl+p"/>
+        <MenuItem Header="_Settings..." Command="{Binding OpenSettings}" />
+        <MenuItem Header="_Language settings..." />
         <Separator/>
-        <MenuItem Header="_Exit" InputGesture="ctrl+q"/>
+        <MenuItem Header="_Exit" />
       </MenuItem>
       <MenuItem Header="_Edit">
-        <MenuItem Header="Undo" InputGesture="ctrl+z"/>
-        <MenuItem Header="Redo" InputGesture="ctrl+shift+z"/>
+        <MenuItem Header="Undo" />
+        <MenuItem Header="Redo" />
       </MenuItem>
     </Menu>
-    <TextBlock/>
 
-
+    <!-- Zone de log en bas -->
     <TextBlock DockPanel.Dock="Bottom"
                Background="BurlyWood"
-               Text="{ Binding LogMessage}"
+               Text="{Binding LogMessage}"
                FontSize="14"
                VerticalAlignment="Center"
                Padding="5" />
 
+    <!-- Contenu principal -->
     <SplitView IsPaneOpen="{Binding IsSidePanelOpen}"
                OpenPaneLength="180"
                CompactPaneLength="32"
                PaneBackground="AliceBlue"
                PanePlacement="Left"
-               DisplayMode="CompactInline"
-                      >
+               DisplayMode="CompactInline">
       <SplitView.Pane>
         <StackPanel>
           <Button Command="{Binding ToggleSidePanel}" HorizontalAlignment="Right">
-            <PathIcon Data="{StaticResource line_horizontal_3_regular}"/>
+            <PathIcon Data="{StaticResource line_horizontal_3_regular}" />
           </Button>
           <ListBox ItemsSource="{Binding ButtonIconList}" SelectedItem="{Binding SelectedSection}">
-
             <ListBox.ItemTemplate>
-              <DataTemplate DataType="{x:Type vm:ButtonIconTemplate}">
+              <DataTemplate DataType="vm:ButtonIconTemplate">
                 <StackPanel Orientation="Horizontal">
-                  <PathIcon Margin="-5" Data="{Binding Icon}"/>
-                  <TextBlock Margin="15,0,0,0" Text="{Binding Label}"></TextBlock>
+                  <PathIcon Margin="-5" Data="{Binding Icon}" />
+                  <TextBlock Margin="15,0,0,0" Text="{Binding Label}" />
                 </StackPanel>
               </DataTemplate>
             </ListBox.ItemTemplate>
           </ListBox>
         </StackPanel>
       </SplitView.Pane>
-
       <SplitView.Content>
         <ScrollViewer HorizontalScrollBarVisibility="Auto">
           <Border Background="Beige">
-            <TransitioningContentControl Content="{Binding CurrentPage}">
-            </TransitioningContentControl>
+            <TransitioningContentControl Content="{Binding CurrentPage}" />
           </Border>
         </ScrollViewer>
-
       </SplitView.Content>
-
     </SplitView>
-
-
-
-
   </DockPanel>
-
-
-
-
-
-
-
 </Window>

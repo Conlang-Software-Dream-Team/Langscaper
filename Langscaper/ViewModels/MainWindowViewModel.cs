@@ -2,21 +2,27 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media;
+using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CSP.Views;
 using Langscaper.ViewModels;
 using Langscaper.Views;
+using Langscaper_Core.Models;
 using Langscaper_Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace CSP.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public string ConlangName => "My Conlang Name";
+    public LanguageModel CurrentLanguage = new LanguageModel();
+    public string? CurrentProjectPath;
+    public string ConlangName => CurrentLanguage.Name;
     public ViewModelBase HomePage = new HomePageViewModel();
 
     [ObservableProperty]
@@ -74,6 +80,48 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         var settingsWindow = new SettingsView();
         settingsWindow.Show();
+    }
+
+    [RelayCommand]
+    public async Task SaveProject()
+    {
+        if (string.IsNullOrEmpty(CurrentProjectPath))
+        {
+            await SaveAsProject();
+            return;
+        }
+
+        LanguageSerializer.Serialize(CurrentLanguage, CurrentProjectPath);
+    }
+
+    [RelayCommand]
+    public async Task SaveAsProject()
+    {
+        var saveOptions = new FilePickerSaveOptions
+        {
+            Title = "Save as...",
+            DefaultExtension = "conlang",
+            FileTypeChoices = new List<FilePickerFileType>
+                {
+                    new FilePickerFileType("Conlang files")
+                    {
+                        Patterns = new List<string> { "*.conlang" }
+                    }
+                }
+        };
+
+        if (Application.Current?.ApplicationLifetime is not Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
+            return;
+        if (desktop.MainWindow is null) return;
+
+        var storageProvider = desktop.MainWindow.StorageProvider;
+        var result = await storageProvider.SaveFilePickerAsync(saveOptions);
+        if (result != null)
+        {
+            // Tente de récupérer le chemin local
+            var localPath = result.TryGetLocalPath();
+            LanguageSerializer.Serialize(CurrentLanguage, localPath);
+        }
     }
 
     private void OnLogWritten(string log)
