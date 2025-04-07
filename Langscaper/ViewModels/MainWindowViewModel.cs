@@ -109,16 +109,17 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             Title = "Save as...",
             DefaultExtension = "conlang",
+            SuggestedFileName = AppState.CurrentLanguage?.Name ?? "Unnamed",
             FileTypeChoices = new List<FilePickerFileType>
-                {
-                    new FilePickerFileType("Conlang files")
-                    {
-                        Patterns = new List<string> { "*.conlang" }
-                    }
-                }
+        {
+            new FilePickerFileType("Conlang files")
+            {
+                Patterns = new List<string> { "*.conlang" }
+            }
+        }
         };
 
-        if (Application.Current?.ApplicationLifetime is not Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
+        if (Application.Current?.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop)
             return;
         if (desktop.MainWindow is null) return;
 
@@ -126,11 +127,11 @@ public partial class MainWindowViewModel : ViewModelBase
         var result = await storageProvider.SaveFilePickerAsync(saveOptions);
         if (result != null)
         {
-            // Tente de récupérer le chemin local
             var localPath = result.TryGetLocalPath();
             LanguageSerializer.Serialize(AppState.CurrentLanguage, localPath);
         }
     }
+
 
     private void OnLogWritten(string log)
     {
