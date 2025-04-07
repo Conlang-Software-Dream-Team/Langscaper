@@ -10,15 +10,50 @@
     <vm:SettingsViewModel/>
   </Design.DataContext>
 
-  <StackPanel Margin="15" Orientation="Vertical">
-    <TextBlock Text="VLC Path:"/>
-    <StackPanel Orientation="Horizontal">
-      <TextBox Text="{Binding VlcPath}" Width="300"/>
-      <Button Content="Browse..." Command="{Binding BrowseForVlcPath}" Margin="5,0,0,0"/>
+  <StackPanel Margin="15" Orientation="Vertical" Spacing="10">
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="0">
+      <Border Background="LightGray"
+              CornerRadius="8,0,0,0"
+              Height="30"
+              Padding="10,0"
+              VerticalAlignment="Center">
+        <TextBlock Text="Name" VerticalAlignment="Center"/>
+      </Border>
+
+      <TextBox Text="ConlangName"
+               Width="250"
+               Height="30"
+               BorderThickness="1"
+               CornerRadius="0,0,8,0"
+               VerticalAlignment="Center"/>
     </StackPanel>
 
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="0">
+      <Border Background="LightGray"
+              CornerRadius="8,0,0,0"
+              Height="30"
+              Padding="10,0"
+              VerticalAlignment="Center">
+        <TextBlock Text="Description" VerticalAlignment="Center"/>
+      </Border>
 
-    <Button Content="Save" Command="{Binding SaveSettingsCommand}" Margin="0,10,0,0"/>
+      <TextBox Text="Ceci est une courte description"
+               Width="250"
+               Height="30"
+               BorderThickness="1"
+               CornerRadius="0,0,8,0"
+               VerticalAlignment="Center"/>
+    </StackPanel>
+
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+      <StackPanel HorizontalAlignment="Stretch" Width="1"/>
+
+      <Button Content="Save"
+              Command="{Binding SaveSettingsCommand}"
+              VerticalAlignment="Center"/>
+    </StackPanel>
   </StackPanel>
+
+
 
 </Window>
