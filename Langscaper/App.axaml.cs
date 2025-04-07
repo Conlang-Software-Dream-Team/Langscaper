@@ -27,7 +27,6 @@ public partial class App : Application
             // Without this line you will get duplicate validations from both Avalonia and CT
             BindingPlugins.DataValidators.RemoveAt(0);
 
-            // TODO : pas static et mettre en parametre a mainwindowsmodel
             AppState state = new AppState();
             state.CurrentLanguage =  new Langscaper_Core.Models.LanguageModel();
             state.CurrentLanguage.Name = "Default name";

@@ -23,7 +23,7 @@
         <Separator/>
         <MenuItem Header="_New language" />
         <Separator/>
-        <MenuItem Header="_Open" />
+        <MenuItem Header="_Open" Command="{Binding OpenProject}"/>
         <MenuItem Header="_Open recent" />
         <Separator/>
         <MenuItem Header="_Language settings..." Command="{Binding OpenSettings}" />

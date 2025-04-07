@@ -136,6 +136,47 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
+    [RelayCommand]
+    public async Task OpenProject()
+    {
+        var openOptions = new FilePickerOpenOptions
+        {
+            Title = "Open project...",
+            AllowMultiple = false,
+            FileTypeFilter = new List<FilePickerFileType>
+        {
+            new FilePickerFileType("Conlang files")
+            {
+                Patterns = new List<string> { "*.conlang" }
+            }
+        }
+        };
+
+        if (Application.Current?.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop)
+            return;
+        if (desktop.MainWindow is null) return;
+
+        var storageProvider = desktop.MainWindow.StorageProvider;
+        var results = await storageProvider.OpenFilePickerAsync(openOptions);
+
+        if (results != null && results.Count > 0)
+        {
+            var file = results[0];
+            var localPath = file.TryGetLocalPath();
+
+            if (localPath != null)
+            {
+                var loadedLanguage = LanguageSerializer.Deserialize(localPath);
+                if (loadedLanguage != null)
+                {
+                    state.CurrentLanguage = loadedLanguage;
+                    // Notifier la vue si besoin
+                }
+            }
+            
+        }
+    }
+
 
     private void OnLogWritten(string log)
     {
