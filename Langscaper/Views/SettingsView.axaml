@@ -20,7 +20,7 @@
         <TextBlock Text="Name" VerticalAlignment="Center"/>
       </Border>
 
-      <TextBox Text="{Binding ConlangName}"
+      <TextBox Text="{Binding ConlangName, Mode=TwoWay}"
                Width="250"
                Height="30"
                BorderThickness="1"

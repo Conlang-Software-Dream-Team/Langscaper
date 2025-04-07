@@ -6,6 +6,7 @@ using CSP.ViewModels;
 using CSP.Views;
 using Langscaper.ViewModels;
 using Langscaper.Views;
+using Langscaper_Core.Services;
 
 namespace CSP;
 
@@ -25,6 +26,10 @@ public partial class App : Application
             // Line below is needed to remove Avalonia data validation.
             // Without this line you will get duplicate validations from both Avalonia and CT
             BindingPlugins.DataValidators.RemoveAt(0);
+
+            // TODO : pas static et mettre en parametre a mainwindowsmodel
+            AppState.CurrentLanguage = new Langscaper_Core.Models.LanguageModel();
+            AppState.CurrentLanguage.Name = "Default name";
 
             mainWindow = new MainWindow
             {

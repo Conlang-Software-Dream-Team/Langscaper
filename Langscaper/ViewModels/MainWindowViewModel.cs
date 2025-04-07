@@ -21,7 +21,9 @@ namespace CSP.ViewModels;
 public partial class MainWindowViewModel : ViewModelBase
 {
     public string? CurrentProjectPath;
-    public string ConlangName => AppState.CurrentLanguage.Name;
+
+    [ObservableProperty]
+    private string conlangName = AppState.CurrentLanguage.Name;
 
     public ViewModelBase HomePage = new HomePageViewModel();
 
@@ -61,6 +63,12 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         //FileManager.OnErrorLogged += OnLogWritten;
         PhonemeAudioService.OnErrorLogged += OnLogWritten;
+        AppState.OnCurrentLanguageChange += UpdateConlangData;
+    }
+
+    private void UpdateConlangData(LanguageModel model)
+    {
+        ConlangName = model.Name;
     }
 
     [RelayCommand]
