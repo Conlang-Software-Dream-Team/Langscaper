@@ -25,15 +25,14 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private string conlangName;
 
-    private AppState state;
 
-    public ViewModelBase HomePage = new HomePageViewModel();
+    public ViewModelBase HomePage;
 
     [ObservableProperty]
     private bool _isSidePanelOpen = false;
 
     [ObservableProperty]
-    private ViewModelBase _currentPage = new HomePageViewModel();
+    private ViewModelBase _currentPage;
 
 
     [ObservableProperty]
@@ -68,6 +67,8 @@ public partial class MainWindowViewModel : ViewModelBase
         state = appState;
         state.OnCurrentLanguageChange += UpdateConlangData;
         conlangName = state.CurrentLanguage.Name;
+        HomePage = new HomePageViewModel(state);
+        _currentPage = HomePage;
     }
 
     private void UpdateConlangData(LanguageModel model)
@@ -170,7 +171,6 @@ public partial class MainWindowViewModel : ViewModelBase
                 if (loadedLanguage != null)
                 {
                     state.CurrentLanguage = loadedLanguage;
-                    // Notifier la vue si besoin
                 }
             }
             
