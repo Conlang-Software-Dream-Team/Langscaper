@@ -3,8 +3,8 @@
 namespace Langscaper_Core.Services
 {
 
-    public class AppState
+    public static class AppState
     {
-        public LanguageModel CurrentLanguage { get; set; } = new();
+        public static LanguageModel CurrentLanguage { get; set; } = new();
     }
 }

@@ -1,12 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CSP;
 using CSP.ViewModels;
 using Langscaper_Core;
-using System.IO;
+using Langscaper_Core.Services;
 
 
 namespace Langscaper.ViewModels
@@ -14,30 +13,15 @@ namespace Langscaper.ViewModels
     public partial class SettingsViewModel : ViewModelBase
     {
         [ObservableProperty]
-        private string vlcPath;
-        private bool CanSave() => !string.IsNullOrWhiteSpace(VlcPath) && File.Exists(VlcPath);
+        private string conlangName;
+        private bool CanSave() => true;
 
         public SettingsViewModel()
         {
-            VlcPath = AppSettings.VlcPath;
+            conlangName = AppState.CurrentLanguage.Name;
         }
 
-        [RelayCommand]
-        public async void BrowseForVlcPath()
-        {
-            var topLevel = GetMainWindow();
-            if (topLevel is null) return;
 
-            var storageProvider = topLevel.StorageProvider;
-            var files = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
-            {
-                Title = "Select VLC executable",
-                AllowMultiple = false
-            });
-
-            if (files.Count > 0)
-                VlcPath = files[0].Path.LocalPath;
-        }
 
 
         private static Window? GetMainWindow()
@@ -52,12 +36,9 @@ namespace Langscaper.ViewModels
         [RelayCommand(CanExecute = nameof(CanSave))]
         private void SaveSettings()
         {
-            AppSettings.VlcPath = VlcPath;
             AppSettings.SaveSettings();
+            AppState.CurrentLanguage.Name = conlangName;
         }
-        partial void OnVlcPathChanged(string value)
-        {
-            SaveSettingsCommand.NotifyCanExecuteChanged();
-        }
+   
     }
 }

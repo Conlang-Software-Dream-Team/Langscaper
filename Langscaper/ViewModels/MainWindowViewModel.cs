@@ -20,9 +20,9 @@ namespace CSP.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public LanguageModel CurrentLanguage = new LanguageModel();
     public string? CurrentProjectPath;
-    public string ConlangName => CurrentLanguage.Name;
+    public string ConlangName => AppState.CurrentLanguage.Name;
+
     public ViewModelBase HomePage = new HomePageViewModel();
 
     [ObservableProperty]
@@ -91,7 +91,7 @@ public partial class MainWindowViewModel : ViewModelBase
             return;
         }
 
-        LanguageSerializer.Serialize(CurrentLanguage, CurrentProjectPath);
+        LanguageSerializer.Serialize(AppState.CurrentLanguage, CurrentProjectPath);
     }
 
     [RelayCommand]
@@ -120,7 +120,7 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             // Tente de récupérer le chemin local
             var localPath = result.TryGetLocalPath();
-            LanguageSerializer.Serialize(CurrentLanguage, localPath);
+            LanguageSerializer.Serialize(AppState.CurrentLanguage, localPath);
         }
     }
 
