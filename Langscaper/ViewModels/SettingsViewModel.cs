@@ -13,11 +13,13 @@ namespace Langscaper.ViewModels
     public partial class SettingsViewModel : ViewModelBase
     {
         [ObservableProperty]
-        private string conlangName = AppState.CurrentLanguage.Name;
+        private string conlangName;
+        private AppState state;
         private bool CanSave() => true;
 
-        public SettingsViewModel()
-        {       
+        public SettingsViewModel(AppState appState)
+        {
+            state = appState;
         }
 
 
@@ -36,8 +38,8 @@ namespace Langscaper.ViewModels
         private void SaveSettings()
         {
             AppSettings.SaveSettings();
-            AppState.CurrentLanguage.Name = conlangName;
-            AppState.OnCurrentLanguageChange?.Invoke(AppState.CurrentLanguage);
+            state.CurrentLanguage.Name = conlangName;
+            state.OnCurrentLanguageChange?.Invoke(state.CurrentLanguage);
         }
    
     }

@@ -3,12 +3,12 @@
 namespace Langscaper_Core.Services
 {
 
-    public static class AppState
+    public  class AppState
     {
-        public static Action<LanguageModel> OnCurrentLanguageChange;
+        public  Action<LanguageModel> OnCurrentLanguageChange;
 
-        private static LanguageModel _currentLanguage;
-        public static LanguageModel CurrentLanguage
+        private  LanguageModel _currentLanguage;
+        public  LanguageModel CurrentLanguage
         {
             get => _currentLanguage;
             set
@@ -16,7 +16,7 @@ namespace Langscaper_Core.Services
                 if (_currentLanguage != value)
                 {
                     _currentLanguage = value;
-                    OnCurrentLanguageChange?.Invoke(_currentLanguage);  // Déclenche l'événement
+                    OnCurrentLanguageChange?.Invoke(_currentLanguage);  
                 }
             }
         }

@@ -26,8 +26,7 @@
         <MenuItem Header="_Open" />
         <MenuItem Header="_Open recent" />
         <Separator/>
-        <MenuItem Header="_Settings..." Command="{Binding OpenSettings}" />
-        <MenuItem Header="_Language settings..." />
+        <MenuItem Header="_Language settings..." Command="{Binding OpenSettings}" />
         <Separator/>
         <MenuItem Header="_Exit" />
       </MenuItem>
@@ -37,7 +36,6 @@
       </MenuItem>
     </Menu>
 
-    <!-- Zone de log en bas -->
     <TextBlock DockPanel.Dock="Bottom"
                Background="BurlyWood"
                Text="{Binding LogMessage}"
@@ -45,7 +43,6 @@
                VerticalAlignment="Center"
                Padding="5" />
 
-    <!-- Contenu principal -->
     <SplitView IsPaneOpen="{Binding IsSidePanelOpen}"
                OpenPaneLength="180"
                CompactPaneLength="32"

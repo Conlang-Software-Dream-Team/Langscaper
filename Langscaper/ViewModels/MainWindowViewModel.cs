@@ -23,7 +23,9 @@ public partial class MainWindowViewModel : ViewModelBase
     public string? CurrentProjectPath;
 
     [ObservableProperty]
-    private string conlangName = AppState.CurrentLanguage.Name;
+    private string conlangName;
+
+    private AppState state;
 
     public ViewModelBase HomePage = new HomePageViewModel();
 
@@ -59,11 +61,13 @@ public partial class MainWindowViewModel : ViewModelBase
         new ButtonIconTemplate(typeof(DocumentationViewModel), "document_regular")
     };
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(AppState appState)
     {
         //FileManager.OnErrorLogged += OnLogWritten;
         PhonemeAudioService.OnErrorLogged += OnLogWritten;
-        AppState.OnCurrentLanguageChange += UpdateConlangData;
+        state = appState;
+        state.OnCurrentLanguageChange += UpdateConlangData;
+        conlangName = state.CurrentLanguage.Name;
     }
 
     private void UpdateConlangData(LanguageModel model)
@@ -86,7 +90,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     public void OpenSettings()
     {
-        var settingsWindow = new SettingsView();
+        var settingsWindow = new SettingsView(state);
         settingsWindow.Show();
     }
 
@@ -99,7 +103,7 @@ public partial class MainWindowViewModel : ViewModelBase
             return;
         }
 
-        LanguageSerializer.Serialize(AppState.CurrentLanguage, CurrentProjectPath);
+        LanguageSerializer.Serialize(state.CurrentLanguage, CurrentProjectPath);
     }
 
     [RelayCommand]
@@ -109,7 +113,7 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             Title = "Save as...",
             DefaultExtension = "conlang",
-            SuggestedFileName = AppState.CurrentLanguage?.Name ?? "Unnamed",
+            SuggestedFileName = state.CurrentLanguage?.Name ?? "Unnamed",
             FileTypeChoices = new List<FilePickerFileType>
         {
             new FilePickerFileType("Conlang files")
@@ -128,7 +132,7 @@ public partial class MainWindowViewModel : ViewModelBase
         if (result != null)
         {
             var localPath = result.TryGetLocalPath();
-            LanguageSerializer.Serialize(AppState.CurrentLanguage, localPath);
+            LanguageSerializer.Serialize(state.CurrentLanguage, localPath);
         }
     }
 

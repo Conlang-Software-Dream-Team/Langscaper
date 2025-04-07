@@ -28,12 +28,13 @@ public partial class App : Application
             BindingPlugins.DataValidators.RemoveAt(0);
 
             // TODO : pas static et mettre en parametre a mainwindowsmodel
-            AppState.CurrentLanguage = new Langscaper_Core.Models.LanguageModel();
-            AppState.CurrentLanguage.Name = "Default name";
+            AppState state = new AppState();
+            state.CurrentLanguage =  new Langscaper_Core.Models.LanguageModel();
+            state.CurrentLanguage.Name = "Default name";
 
             mainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel()
+                DataContext = new MainWindowViewModel(state)
             };
 
             var splashScreen = new SplashscreenWindow
